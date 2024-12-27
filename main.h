@@ -10,6 +10,8 @@
 #include <msp430.h>
 #include "DSPLib.h"
 #include "myuart.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 uint16_t UART_FG=0;
 
@@ -66,7 +68,111 @@ int boardSetup(){
     _enable_interrupt();
     return 0;
 };
+/* Prototypes for the standard FreeRTOS callback/hook functions implemented
+within this file. */
+void vApplicationMallocFailedHook( void );
+void vApplicationIdleHook( void );
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
+void vApplicationTickHook( void );
 
+/* The heap is allocated here so the "persistent" qualifier can be used.  This
+requires configAPPLICATION_ALLOCATED_HEAP to be set to 1 in FreeRTOSConfig.h.
+See http://www.freertos.org/a00111.html for more information. */
+
+#ifdef __ICC430__
+    __persistent                    /* IAR version. */
+#else
+    #pragma PERSISTENT( ucHeap )    /* CCS version. */
+#endif
+uint8_t ucHeap[ configTOTAL_HEAP_SIZE ] = { 0 };
+
+void vApplicationMallocFailedHook( void )
+{
+    /* Force an assert. */
+    configASSERT( ( volatile void * ) NULL );
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+{
+    ( void ) pcTaskName;
+    ( void ) pxTask;
+
+    /* Force an assert. */
+    configASSERT( ( volatile void * ) NULL );
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationIdleHook( void )
+{
+    __bis_SR_register( LPM4_bits + GIE );
+    __no_operation();
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationTickHook( void )
+{
+    return;
+}
+/*-----------------------------------------------------------*/
+
+/* The MSP430X port uses this callback function to configure its tick interrupt.
+This allows the application to choose the tick interrupt source.
+configTICK_VECTOR must also be set in FreeRTOSConfig.h to the correct
+interrupt vector for the chosen tick interrupt source.  This implementation of
+vApplicationSetupTimerInterrupt() generates the tick from timer A0, so in this
+case configTICK_VECTOR is set to TIMER0_A0_VECTOR. */
+void vApplicationSetupTimerInterrupt( void )
+{
+const unsigned short usACLK_Frequency_Hz = 32768;
+
+    /* Ensure the timer is stopped. */
+    TA0CTL = 0;
+
+    /* Run the timer from the ACLK. */
+    TA0CTL = TASSEL_1;
+
+    /* Clear everything to start with. */
+    TA0CTL |= TACLR;
+
+    /* Set the compare match value according to the tick rate we want. */
+    TA0CCR0 = usACLK_Frequency_Hz / configTICK_RATE_HZ;
+
+    /* Enable the interrupts. */
+    TA0CCTL0 = CCIE;
+
+    /* Start up clean. */
+    TA0CTL |= TACLR;
+
+    /* Up mode. */
+    TA0CTL |= MC_1;
+}
+
+void vConfigureTimerForRunTimeStats( void )
+{
+    /* Configure a timer that is used as the time base for run time stats.  See
+    http://www.freertos.org/rtos-run-time-stats.html */
+
+    /* Ensure the timer is stopped. */
+    TA1CTL = 0;
+
+    /* Start up clean. */
+    TA1CTL |= TACLR;
+
+    /* Run the timer from the ACLK/8, continuous mode, interrupt enable. */
+    TA1CTL = TASSEL_1 | ID__8 | MC__CONTINUOUS | TAIE;
+}
+
+
+#pragma vector=TIMER1_A1_VECTOR
+__interrupt void v4RunTimeStatsTimerOverflow( void )
+{
+    TA1CTL &= ~TAIFG;
+
+    /* 16-bit overflow, so add 17th bit. */
+    ulRunTimeCounterOverflows += 0x10000;
+    __bic_SR_register_on_exit( SCG1 + SCG0 + OSCOFF + CPUOFF );
+}
 
 
 

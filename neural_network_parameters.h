@@ -93,7 +93,7 @@ extern dtype MULTIPLY_BUFFER[LEA_RAM_LENGTH];
 
 /* INPUT HERE */
 #pragma PERSISTENT(input_buffer)  //label:3
-static dtype input_buffer[INPUT_LENGTH] = { 27, 28, 34, 35, 29, 25, 31, 28, 27, 28, 30, 29, 30, 35, 38, 39,
+static int16_t input_buffer[INPUT_LENGTH] = { 27, 28, 34, 35, 29, 25, 31, 28, 27, 28, 30, 29, 30, 35, 38, 39,
                                            36, 31, 29, 29, 25, 18, 19, 17, 18, 12, 9, 10, 12, 6, -4, -14,
                                            21, 20, 28, 35, 31, 29, 33, 31, 32, 25, 24, 28, 32, 39, 40, 40,
                                            38, 29, 23, 20, 14, 8, 9, 10, 18, 16, 14, 11, 12, 6, -5, -11,

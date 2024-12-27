@@ -51,7 +51,7 @@ matrix *filter_im2col(matrix* result, matrix *input, matrix *filter, uint16_t pr
 //                    if(input->data[k+n]-convscale.x_zero_point>=128)
 //                        inputSrc[n]=32767;//input->data[k+n]=32767;
 //                    else
-                        inputSrc[n] = (input->data[k + n] - convscale.x_zero_point) << 7; //koo: need to make -5 as a parameter
+                        inputSrc[n] = ((int16_t)input->data[k + n] - convscale.x_zero_point) << 7; //koo: need to make -5 as a parameter
                 }
                 inputSrc += filter->numCols;
             }

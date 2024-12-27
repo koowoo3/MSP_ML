@@ -118,6 +118,9 @@ DSPLib/source/matrix \
 DSPLib/source/transform \
 DSPLib/source/utility \
 DSPLib/source/vector \
+Source \
+Source/portable/CCS/MSP430X \
+Source/portable/MemMang \
 driverlib/MSP430FR5xx_6xx \
 layer \
 math \

@@ -1,29 +1,41 @@
 # FIXED
 
 main.obj: ../main.c
-main.obj: ../main.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/FreeRTOS.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
-main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h
-main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h
-main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/FreeRTOSConfig.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/projdefs.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/portable.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/deprecated_definitions.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/portable/CCS/MSP430X/portmacro.h
 main.obj: C:/ti/ccs1260/ccs/ccs_base/msp430/include/msp430.h
 main.obj: C:/ti/ccs1260/ccs/ccs_base/msp430/include/msp430fr5994.h
 main.obj: C:/ti/ccs1260/ccs/ccs_base/msp430/include/in430.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h
 main.obj: C:/ti/ccs1260/ccs/ccs_base/msp430/include/legacy.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/mpu_wrappers.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/task.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/semphr.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h
+main.obj: ../main.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h
+main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/esi.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/eusci_b_i2c.h
@@ -87,25 +99,17 @@ main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/math
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_defs.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limits.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
-main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/timemeasure.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h
 
 ../main.c:
 
-../main.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/FreeRTOS.h:
 
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_ti_config.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/linkage.h:
-
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
-
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h:
-
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h:
-
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h:
 
@@ -113,17 +117,25 @@ C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/stdint.h:
 
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/cdefs.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_types.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h:
+
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/FreeRTOSConfig.h:
 
-C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/projdefs.h:
 
-C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/portable.h:
 
-C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/deprecated_definitions.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/portable/CCS/MSP430X/portmacro.h:
 
 C:/ti/ccs1260/ccs/ccs_base/msp430/include/msp430.h:
 
@@ -136,6 +148,30 @@ C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics.h:
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/intrinsics_legacy_undefs.h:
 
 C:/ti/ccs1260/ccs/ccs_base/msp430/include/legacy.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/mpu_wrappers.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/task.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/semphr.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h:
+
+../main.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/string.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_string.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/inc/hw_memmap.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
@@ -263,5 +299,5 @@ C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limit
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
-C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/timemeasure.h:
+C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h:
 
