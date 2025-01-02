@@ -41,6 +41,7 @@ layer/max_pooling.obj: ../math/fixed_point_ops.h
 layer/max_pooling.obj: ../neural_network_parameters.h
 layer/max_pooling.obj: ../math/matrix.h
 layer/max_pooling.obj: ../parameter/conv.h
+layer/max_pooling.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 
 ../layer/max_pooling.c:
 
@@ -123,4 +124,6 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
 ../math/matrix.h:
 
 ../parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 

@@ -30,6 +30,8 @@ layer/avg_pool.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include
 layer/avg_pool.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_filter.h
 layer/avg_pool.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_transform.h
 layer/avg_pool.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h
+layer/avg_pool.obj: ../neural_network_parameters.h
+layer/avg_pool.obj: ../math/matrix.h
 
 ../layer/avg_pool.c:
 
@@ -90,4 +92,8 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_filter.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_transform.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
+
+../neural_network_parameters.h:
+
+../math/matrix.h:
 

@@ -17,7 +17,7 @@ static uint16_t SPARSEMAX_BUFFER[NUM_OUTPUTS] = {0};
 DSPLIB_DATA(MULTIPLY_BUFFER, 4);
 _q15 MULTIPLY_BUFFER[LEA_RAM_LENGTH];
 
-matrix *filter_im2col(matrix* result, matrix *input, matrix *filter, uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, Convscale convscale){
+matrix *filter_im2col(matrix* result, matrix_8 *input, matrix_8 *filter, uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, Convscale convscale){
     uint16_t filter_length = filter->numRows * filter->numCols;
     uint16_t filter_offset = filter_length + (filter_length & 1); //koo: if filter_length is odd add 1, even add 0.
     uint16_t result_col_offset = result->numCols + (result->numCols & 1);
@@ -32,7 +32,7 @@ matrix *filter_im2col(matrix* result, matrix *input, matrix *filter, uint16_t pr
         if(filter->data[i]>=128)     //weight_zero_point is all 0
             *(filterSrc) = 32767;
         else
-            *(filterSrc) = filter->data[i] << 8; //<< 3;  //정밀도 향상  koo: 이거 왜함? 가중치에 8을 곱함.//w_zero_point = 0
+            *(filterSrc) = (int16_t)filter->data[i] << 8; //<< 3;  //정밀도 향상  koo: 이거 왜함? 가중치에 8을 곱함.//w_zero_point = 0
         filterSrc += 2;
     }
 
@@ -51,7 +51,7 @@ matrix *filter_im2col(matrix* result, matrix *input, matrix *filter, uint16_t pr
 //                    if(input->data[k+n]-convscale.x_zero_point>=128)
 //                        inputSrc[n]=32767;//input->data[k+n]=32767;
 //                    else
-                        inputSrc[n] = ((int16_t)input->data[k + n] - convscale.x_zero_point) << 7; //koo: need to make -5 as a parameter
+                        inputSrc[n] = (int16_t)((int16_t)input->data[k + n] - (int16_t)convscale.x_zero_point) << 7; //koo: need to make -5 as a parameter
                 }
                 inputSrc += filter->numCols;
             }
@@ -174,7 +174,7 @@ matrix *filter_LEA(matrix* result, matrix *input, matrix *filter, uint16_t preci
     return result;
 }
 
-dtype *dma_load(dtype *result, dtype *data, uint16_t n) {
+int8_t *dma_load(int8_t *result, int8_t *data, uint16_t n) {
     /*
      * Transfer data in n bytes block to result using DMA
      * This is the correct version for 20-bit address
@@ -184,6 +184,8 @@ dtype *dma_load(dtype *result, dtype *data, uint16_t n) {
     __data16_write_addr((unsigned short)(__MSP430_BASEADDRESS_DMA__ + DMA_CHANNEL_0 + OFS_DMA0DA), result);
     DMA0SZ = n;                                      // Block size
     DMA0CTL = DMADT_5 | DMASRCINCR_3 | DMADSTINCR_3; // Rpt, inc
+    DMA0CTL |= DMASRCBYTE;                           //koo: this is for 8bit data transfer
+    DMA0CTL |=DMADSTBYTE;                            //koo: this is for 8bit data transfer
     DMA0CTL |= DMAEN;                                // Enable DMA0
     DMA0CTL |= DMAREQ;
     return result;

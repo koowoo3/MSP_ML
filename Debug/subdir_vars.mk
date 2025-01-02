@@ -9,21 +9,45 @@ CMD_SRCS += \
 ../lnk_msp430fr5994.cmd 
 
 C_SRCS += \
-../main.c 
+../main.c \
+../rtc.c \
+../scheduler.c \
+../task1.c \
+../task2.c 
 
 C_DEPS += \
-./main.d 
+./main.d \
+./rtc.d \
+./scheduler.d \
+./task1.d \
+./task2.d 
 
 OBJS += \
-./main.obj 
+./main.obj \
+./rtc.obj \
+./scheduler.obj \
+./task1.obj \
+./task2.obj 
 
 OBJS__QUOTED += \
-"main.obj" 
+"main.obj" \
+"rtc.obj" \
+"scheduler.obj" \
+"task1.obj" \
+"task2.obj" 
 
 C_DEPS__QUOTED += \
-"main.d" 
+"main.d" \
+"rtc.d" \
+"scheduler.d" \
+"task1.d" \
+"task2.d" 
 
 C_SRCS__QUOTED += \
-"../main.c" 
+"../main.c" \
+"../rtc.c" \
+"../scheduler.c" \
+"../task1.c" \
+"../task2.c" 
 
 

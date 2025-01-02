@@ -90,17 +90,17 @@ EUSCI_A_UART_initParam UartParams[9] = {
    EUSCI_A_UART_ONE_STOP_BIT,
    EUSCI_A_UART_MODE,
    EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION
-},{//24MHz 115200
-           EUSCI_A_UART_CLOCKSOURCE_SMCLK,
-           13,                                                                        // clockPrescalar
-           0,                                                                          // firstModReg
-           37,                                                                        // secondModReg
-           EUSCI_A_UART_NO_PARITY,
-           EUSCI_A_UART_LSB_FIRST,
-           EUSCI_A_UART_ONE_STOP_BIT,
-           EUSCI_A_UART_MODE,
-           EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION
-        }};
+},{//16MHz, 115200 Baud
+   EUSCI_A_UART_CLOCKSOURCE_SMCLK,
+   8,     // clockPrescaler
+   10,    // firstModReg
+   247,   // secondModReg
+   EUSCI_A_UART_NO_PARITY,
+   EUSCI_A_UART_LSB_FIRST,
+   EUSCI_A_UART_ONE_STOP_BIT,
+   EUSCI_A_UART_MODE,
+   EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION
+}};
 
 
 void _DBGUART(char* format,...)
@@ -254,7 +254,7 @@ char *convertl(unsigned long num, int base)
 /* Initialize serial */
 void uartinit()
 {
-    FreqLevel=8;
+    FreqLevel=9;
     if(uartsetup == 0){
         // Configure UART
         EUSCI_A_UART_initParam param = UartParams[FreqLevel-1];

@@ -9,21 +9,22 @@
 #include <stdint.h>
 #include "math/fixed_point_ops.h"
 
-#pragma LOCATION(MODEL_ARRAY_OUTPUT, 0x10000)
-#pragma PERSISTENT(MODEL_ARRAY_OUTPUT)
-int16_t MODEL_ARRAY_OUTPUT[] = {0};
+//#pragma LOCATION(MODEL_ARRAY_OUTPUT, 0x10000)
+//#pragma PERSISTENT(MODEL_ARRAY_OUTPUT)
+//int8_t MODEL_ARRAY_OUTPUT[] = {0};
 
 #pragma PERSISTENT(MODEL_ARRAY_TEMP)
-int16_t MODEL_ARRAY_TEMP[] = {0};
+int8_t MODEL_ARRAY_TEMP[] = {0};
 
-void conv(matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale){
+void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convscale convscale, int8_t task_num){
 
     uint16_t activation, numChannels, filter_numRows, filter_numCols, stride_numRows, stride_numCols, filters_length, padding;
     uint16_t numFilters;
 
     int16_t *bias_array;
 
-    output->data = MODEL_ARRAY_OUTPUT;
+
+    output->data = MODEL_ARRAY_TEMP;
 
     // extract and prepare layer parameters
     activation = convparams.activation; //2; //Relu (2)
@@ -62,23 +63,29 @@ void conv(matrix *output, matrix *input, ConvLayerParams convparams, Convscale c
             output->numCols ++;
         }
     }
-    int16_t *filters_array;
+    int8_t *filters_array;
     // extract and prepare weights
     if(convparams.convnum == 1){
         filters_array = conv1_weight;
         bias_array = conv1_bias;
     }
     else if(convparams.convnum == 2){
-        input->data = MODEL_ARRAY_TEMP;
+        if(task_num == 1)
+            input->data = Task1_Input;
+        else if(task_num == 2)
+            input->data = Task2_Input;
         filters_array = conv2_weight;
         bias_array = conv2_bias;
     }
     else if(convparams.convnum == 3){
-        input->data = MODEL_ARRAY_TEMP;
+        if(task_num == 1)
+            input->data = Task1_Input;
+        else if(task_num == 2)
+            input->data = Task2_Input;
         filters_array = conv3_weight;
         bias_array = conv3_bias;
     }
-    matrix filters = {filters_array, filter_numRows, filter_numCols};
+    matrix_8 filters = {filters_array, filter_numRows, filter_numCols};
 
 
 
@@ -93,8 +100,10 @@ void conv(matrix *output, matrix *input, ConvLayerParams convparams, Convscale c
 //    else{
 //        conv2d(output, input, &filters, numFilters, numChannels, bias_array, &fp_linear, FIXED_POINT_PRECISION, stride_numRows, stride_numCols, padding);
 //    }
-
-    dma_load(MODEL_ARRAY_TEMP, output->data, output->numRows * output->numCols * numFilters);
+    if(task_num == 1)
+        dma_load(Task1_Input, output->data, output->numRows * output->numCols * numFilters);
+    else if(task_num == 2)
+        dma_load(Task2_Input, output->data, output->numRows * output->numCols * numFilters);
 }
 
 

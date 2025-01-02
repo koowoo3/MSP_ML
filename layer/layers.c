@@ -9,10 +9,10 @@
 #include "myuart.h"
 
 #pragma PERSISTENT(PADDING_BUFFER)
-static dtype PADDING_BUFFER[PADDING_BUFFER_LENGTH] = {0};
+static int8_t PADDING_BUFFER[PADDING_BUFFER_LENGTH] = {0};
 
 #pragma PERSISTENT(FILTER_BUFFER)
-static dtype FILTER_BUFFER[FILTER_BUFFER_LENGTH] = {0};
+static int16_t FILTER_BUFFER[FILTER_BUFFER_LENGTH] = {0};
 
 extern int16_t MODEL_BLOCK_TEMP[100];
 
@@ -73,7 +73,7 @@ matrix *maxpooling(matrix* result, matrix *input, uint16_t pool_numRows, uint16_
     return result;
 }
 
-matrix *maxpooling_with_importance(matrix* result, matrix *input, uint16_t pool_numRows, uint16_t pool_numCols, uint16_t filter_num, int16_t *block, int16_t scale, uint16_t shift){
+matrix_8 *maxpooling_with_importance(matrix_8* result, matrix_8 *input, uint16_t pool_numRows, uint16_t pool_numCols, uint16_t filter_num, int16_t *block, int16_t scale, uint16_t shift){
     /**
      * Implementation of maxpooling layer
      */
@@ -104,7 +104,7 @@ matrix *maxpooling_with_importance(matrix* result, matrix *input, uint16_t pool_
                 for (ky = 0; ky < pool_numCols; ky ++){
                     // traverse the entire sub-block that are related to this pooling
                     input_offset = (x + kx) * input->numCols + (y + ky);
-                    temp = input->data[input_offset] - A_zero_point;
+                    temp = (int16_t)input->data[input_offset] - A_zero_point;
                     temp *= importance;
                     temp *= scale;
                     temp >>= shift;
@@ -117,7 +117,7 @@ matrix *maxpooling_with_importance(matrix* result, matrix *input, uint16_t pool_
             if (max < -128) max = -128;
 
             result_offset = i * result_numCols + j;
-            result->data[result_offset] = max;
+            result->data[result_offset] = (int8_t)max;
 
         }
     }
@@ -125,14 +125,14 @@ matrix *maxpooling_with_importance(matrix* result, matrix *input, uint16_t pool_
 }
 
 
-matrix *maxpooling_filters(matrix *result, matrix *input, uint16_t numFilters, uint16_t pool_numRows, uint16_t pool_numCols, int16_t *block, int16_t scale, uint16_t shift){
+matrix_8 *maxpooling_filters(matrix_8 *result, matrix_8 *input, uint16_t numFilters, uint16_t pool_numRows, uint16_t pool_numCols, int16_t *block, int16_t scale, uint16_t shift){
     /**
      * Iteration for each filter
      * one conv2d layer usually has multiple filters, we do maxpooling one by one
      */
 
     uint16_t i, filter_offset, result_offset, filter_length = input->numRows * input->numCols, result_length = result->numRows * result->numCols;
-    int16_t *filterData = input->data, *resultData = result->data;
+    int8_t *filterData = input->data, *resultData = result->data;
 
     for (i = numFilters; i > 0; i --){
         filter_offset = (i - 1) * filter_length;
@@ -170,10 +170,10 @@ matrix *flatten(matrix* result, matrix *input, uint16_t num_filter){
     return result;
 }
 
-matrix *padding_same(matrix *result, matrix *input, matrix *filter, uint16_t stride_numRows, uint16_t stride_numCols, Convscale convscale) {
+matrix_8 *padding_same(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t stride_numRows, uint16_t stride_numCols, Convscale convscale) {
     uint16_t input_numRows = input->numRows, input_numCols = input->numCols, filter_numRows = filter->numRows, filter_numCols = filter->numCols;
     uint16_t pad_along_numRows, pad_along_numCols, i, input_offset, padding_offset;
-    int16_t * idx = PADDING_BUFFER;
+    int8_t * idx = PADDING_BUFFER;
     if (input_numRows % stride_numRows) {
         pad_along_numRows = filter_numRows - input_numRows % stride_numRows;
     }
@@ -192,7 +192,7 @@ matrix *padding_same(matrix *result, matrix *input, matrix *filter, uint16_t str
 
     //memset(PADDING_BUFFER, convscale.x_zero_point, result->numRows * result->numCols * sizeof(dtype));
     for (i = 0; i < result->numRows * result->numCols; i++) {
-        idx[i] = convscale.x_zero_point;
+        idx[i] = (int8_t)convscale.x_zero_point;
     }
 
     for (i = 0; i < input_numRows; i ++) {
@@ -235,9 +235,9 @@ matrix *filter_simple(matrix *result, matrix *input, matrix *filter, uint16_t pr
 }
 
 
-matrix *filters_sum(matrix *result, matrix *input, matrix *filter, uint16_t numChannels, int16_t b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, uint16_t conv_numRows, uint16_t conv_numCols, Convscale convscale){
-    int16_t *filter_head = filter->data;
-    int16_t *input_head = input->data;
+matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numChannels, int16_t b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, uint16_t conv_numRows, uint16_t conv_numCols, Convscale convscale){
+    int8_t *filter_head = filter->data;
+    int8_t *input_head = input->data;
     uint16_t i, result_length = result->numRows * result->numCols, input_length = input->numRows * input->numCols, filter_length = filter->numRows * filter->numCols, input_numRows = input->numRows, input_numCols = input->numCols;
     matrix temp = {FILTER_BUFFER, result->numRows, result->numCols};
     int32_t t_result[1024];
@@ -289,9 +289,9 @@ matrix *filters_sum(matrix *result, matrix *input, matrix *filter, uint16_t numC
     return result;
 }
 
-matrix *conv2d(matrix *result, matrix *input, matrix *filter, uint16_t numFilters, uint16_t numChannels, int16_t *b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, Convscale convscale){
+matrix_8 *conv2d(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numFilters, uint16_t numChannels, int16_t *b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, Convscale convscale){
     uint16_t i, result_length = result->numRows * result->numCols, filter_length = filter->numRows * filter->numCols * numChannels;
-    int16_t *filter_head = filter->data, *result_head = result->data;
+    int8_t *filter_head = filter->data, *result_head = result->data;
     uint16_t conv_numRows = (input->numRows - filter->numRows + 2 * padding) / stride_numRows + 1;  //koo: ¹Ù²Ù±â
     uint16_t conv_numCols = (input->numCols - filter->numCols + 2 * padding) / stride_numCols + 1;
     for (i = numFilters; i > 0; i --){

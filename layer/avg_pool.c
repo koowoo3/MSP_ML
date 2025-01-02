@@ -3,9 +3,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "DSPLib.h"
-
-extern int16_t MODEL_ARRAY_TEMP[];
-extern int16_t MULTIPLY_BUFFER[1892];
+#include "../neural_network_parameters.h"
+//extern int8_t MODEL_ARRAY_TEMP[];
+//extern int16_t MULTIPLY_BUFFER[1892];
 //extern int16_t MODEL_BLOCK_TEMP[100];
 
 
@@ -97,10 +97,9 @@ Global_avg_param SE_3={   //koo: need to fix
 
 volatile int32_t totalSum = 0;
 
-void global_avg_pool(int16_t row, int16_t col, int16_t block_number, int16_t channel, int16_t *block, int se_idx)
+void global_avg_pool(int16_t row, int16_t col, int16_t block_number, int16_t channel, int16_t *block, int se_idx, int task_num)
 {
     int16_t start_index; // 각 블록은 1024(지금은 32x32) 요소 크기
-    int32_t temp[Size]={0,};
     Global_avg_param avg;
     switch(se_idx){
     case 1: avg = SE_1; break;
@@ -112,7 +111,11 @@ void global_avg_pool(int16_t row, int16_t col, int16_t block_number, int16_t cha
     int16_t y_zero_point = avg.y_zero_point; //avg1
     int16_t scale = avg.scale; //avg1 //shift=9
     int16_t shift = avg.shift;
-    int16_t * idx = MODEL_ARRAY_TEMP;
+    int8_t * idx;
+    if(task_num == 1)
+        idx = Task1_Input;
+    else if(task_num == 2)
+        idx = Task2_Input;
     start_index = block_number * row * col;
     idx = idx + start_index;
 
@@ -125,7 +128,7 @@ void global_avg_pool(int16_t row, int16_t col, int16_t block_number, int16_t cha
 //        addParams.rows = 1;        // 한 행씩 연산 koo: 원래 lea썼는데 안 써도 속도가 안느린듯
 //        addParams.cols = col;      // 열
         for (uint16_t r = 0; r < row; r++) { //koo: 각 행의 합을 계산하여 temp에 저장
-            for (uint16_t c = 0; c < col; c++) { //koo:  행 전체를 합 계산해서 temp에 누적해서 저장 */
+            for (uint16_t c = 0; c < col; c++) { //koo:  행 전체를 합 계산해서 temp에 누적해서 저장
                 totalSum += idx[r * col + c];
             }
         }

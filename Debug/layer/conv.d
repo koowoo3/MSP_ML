@@ -12,6 +12,7 @@ layer/conv.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/includ
 layer/conv.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
 layer/conv.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
 layer/conv.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
+layer/conv.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 layer/conv.obj: ../layer/layers.h
 layer/conv.obj: ../math/matrix_ops.h
 layer/conv.obj: ../math/matrix.h
@@ -64,6 +65,8 @@ C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 ../layer/layers.h:
 

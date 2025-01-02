@@ -1,4 +1,8 @@
 "./main.obj"
+"./rtc.obj"
+"./scheduler.obj"
+"./task1.obj"
+"./task2.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df1_q15.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df2_ext_q15.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df2_q15.obj"

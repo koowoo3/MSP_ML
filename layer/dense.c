@@ -99,7 +99,7 @@ Sigmoid_param Sig_3={
 void se1_fc1(int16_t* input, int16_t* result, int fc_num, int se_idx){
 
     Se_block_param se_block;
-    int16_t * weight;
+    int8_t * weight;
     switch(se_idx){
     case 1: se_block = SE_1_1;
             weight= se1_fc1_weight;
@@ -127,7 +127,7 @@ void se1_fc1(int16_t* input, int16_t* result, int fc_num, int se_idx){
         sum=0;
         for(j=0; j<fc_num; j++){
             int16_t a = input[j]-a_zero_point;
-            volatile int16_t b = weight[i+(n*j)]- b_zero_point;
+            volatile int16_t b = (int16_t)weight[i+(n*j)]- b_zero_point;
             sum += a*b;
         }
         sum = (sum * scale) >> shift;
@@ -180,7 +180,7 @@ int8_t sigmoid(int8_t input, int sig_idx){
 void se1_fc2(int16_t* input, int16_t* output, int fc_num, int se_idx){
 
     Se_block_param se_block;
-    volatile int16_t * weight = se1_fc2_weight;
+    volatile int8_t * weight = se1_fc2_weight;
     switch(se_idx){
     case 1: se_block = SE_1_2;
             weight= se1_fc2_weight;
@@ -206,7 +206,7 @@ void se1_fc2(int16_t* input, int16_t* output, int fc_num, int se_idx){
         int32_t acc = 0;
         for(j=0; j<n; j++){
 
-            volatile int32_t result = (input[j] - a_zero_point) * (weight[j*fc_num+i]-b_zero_point);
+            volatile int32_t result = ((int16_t)input[j] - a_zero_point) * ((int16_t)weight[j*fc_num+i]-b_zero_point);
            acc+=result;
         }
             volatile int32_t y_quantized = (acc * scale) >> shift;
@@ -223,7 +223,7 @@ void se1_fc2(int16_t* input, int16_t* output, int fc_num, int se_idx){
     return;
 }
 
-void dense_koo(int16_t* input, int16_t* output) {
+int8_t dense_koo(int8_t* input, int8_t* output) {
 
     //float a_scale = 0.03069718f;
     int a_zero_point = -128;
@@ -233,16 +233,18 @@ void dense_koo(int16_t* input, int16_t* output) {
     int y_zero_point = 5;
 
     volatile int32_t sum = 0;  // 더 큰 범위로 누적
-    int16_t* input_idx = input;
-    int16_t* weight = fc_weight;
+    int8_t* input_idx = input;
+    int8_t* weight = fc_weight;
     int16_t* bias = fc_bias;
 
+    int8_t ans = 0;
+    int8_t max = -128;
     for (int j = 0; j < 10; j++) {
         int32_t acc = 0;
 
         for (int p = 0; p < 1024; p++) {
-            int32_t a_val = input_idx[p] - a_zero_point; // Dequantize A
-            int32_t b_val = weight[p + j* 1024] - b_zero_point; // Dequantize B
+            int32_t a_val = (int32_t)input_idx[p] - a_zero_point; // Dequantize A
+            int32_t b_val = (int32_t)weight[p + j* 1024] - b_zero_point; // Dequantize B
             acc += a_val * b_val; // Multiply and accumulate
         }
 
@@ -263,7 +265,13 @@ void dense_koo(int16_t* input, int16_t* output) {
 
         // Store the result
         output[j] = (int8_t)acc;
+
+        if(output[j]>max){
+            max = output[j];
+            ans = j;
+        }
     }
+    return ans;
 }
 
 

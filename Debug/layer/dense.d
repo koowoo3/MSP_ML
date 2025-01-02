@@ -42,6 +42,7 @@ layer/dense.obj: ../math/fixed_point_ops.h
 layer/dense.obj: ../neural_network_parameters.h
 layer/dense.obj: ../math/matrix.h
 layer/dense.obj: ../parameter/conv.h
+layer/dense.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 layer/dense.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/fixed_point_ops.h
 layer/dense.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/math.h
 layer/dense.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_defs.h
@@ -130,6 +131,8 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
 ../math/matrix.h:
 
 ../parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/fixed_point_ops.h:
 

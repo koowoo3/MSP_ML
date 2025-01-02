@@ -77,14 +77,20 @@
 #define OUTPUT_LENGTH (OUTPUT_NUM_LABELS*LEA_RESERVED)
 
 //for model_output
-extern int16_t MODEL_ARRAY_OUTPUT[20000];
+extern int8_t Task1_Input[20000];
+extern int8_t Task2_Input[20000];
 
 //for model temp
-extern int16_t MODEL_ARRAY_TEMP[MODEL_ARRAY_TEMP_LENGTH];
+extern int8_t MODEL_ARRAY_TEMP[MODEL_ARRAY_TEMP_LENGTH];
 
-extern int16_t MODEL_BLOCK_TEMP[100];
+extern int16_t MODEL_BLOCK_TEMP_1[100];
+extern int16_t MODEL_BLOCK_TEMP_2[100];
 
-extern int16_t SE_FC[10];
+extern int16_t SE_FC_1[10];
+extern int16_t SE_FC_2[10];
+
+extern int8_t importance_1[64];
+extern int8_t importance_2[64];
 
 
 //for LEA
@@ -93,7 +99,7 @@ extern dtype MULTIPLY_BUFFER[LEA_RAM_LENGTH];
 
 /* INPUT HERE */
 #pragma PERSISTENT(input_buffer)  //label:3
-static int16_t input_buffer[INPUT_LENGTH] = { 27, 28, 34, 35, 29, 25, 31, 28, 27, 28, 30, 29, 30, 35, 38, 39,
+static int8_t input_buffer[INPUT_LENGTH] = { 27, 28, 34, 35, 29, 25, 31, 28, 27, 28, 30, 29, 30, 35, 38, 39,
                                            36, 31, 29, 29, 25, 18, 19, 17, 18, 12, 9, 10, 12, 6, -4, -14,
                                            21, 20, 28, 35, 31, 29, 33, 31, 32, 25, 24, 28, 32, 39, 40, 40,
                                            38, 29, 23, 20, 14, 8, 9, 10, 18, 16, 14, 11, 12, 6, -5, -11,
@@ -288,8 +294,8 @@ static int16_t input_buffer[INPUT_LENGTH] = { 27, 28, 34, 35, 29, 25, 31, 28, 27
                                        };
 
 #pragma PERSISTENT(output_buffer)
-static dtype output_buffer[OUTPUT_LENGTH] = {0};
-static dtype label;
-static matrix inputFeatures, outputLabels;
+static int8_t output_buffer[OUTPUT_LENGTH] = {0};
+static int8_t label;
+static matrix_8 inputFeatures, outputLabels;
 
 #endif

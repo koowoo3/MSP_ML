@@ -39,6 +39,7 @@ parameter/conv_parameter.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math
 parameter/conv_parameter.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/neural_network_parameters.h
 parameter/conv_parameter.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 parameter/conv_parameter.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h
+parameter/conv_parameter.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 
 ../parameter/conv_parameter.c:
 
@@ -117,4 +118,6 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/neural_network_parameters.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 

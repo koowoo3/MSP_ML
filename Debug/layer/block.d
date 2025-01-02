@@ -49,6 +49,7 @@ layer/block.obj: ../math/fixed_point_ops.h
 layer/block.obj: ../neural_network_parameters.h
 layer/block.obj: ../math/matrix.h
 layer/block.obj: ../parameter/conv.h
+layer/block.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 
 ../layer/block.c:
 
@@ -147,4 +148,6 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 ../math/matrix.h:
 
 ../parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 

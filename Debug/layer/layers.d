@@ -39,6 +39,7 @@ layer/layers.obj: ../math/fixed_point_ops.h
 layer/layers.obj: ../neural_network_parameters.h
 layer/layers.obj: ../math/matrix.h
 layer/layers.obj: ../parameter/conv.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h
 
 ../layer/layers.c:
@@ -118,6 +119,8 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
 ../math/matrix.h:
 
 ../parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h:
 

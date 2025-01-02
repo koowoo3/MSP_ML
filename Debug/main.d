@@ -83,6 +83,7 @@ main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_tr
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/layer/layers.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix_ops.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
@@ -100,6 +101,10 @@ main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_def
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limits.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h
+main.obj: ../task_common.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h
+main.obj: ../rtc.h
 
 ../main.c:
 
@@ -267,6 +272,8 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h:
 
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
+
 C:/Users/kooo/Documents/Koo_Intermittent/int8/layer/layers.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix_ops.h:
@@ -300,4 +307,12 @@ C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limit
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h:
+
+../task_common.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h:
+
+../rtc.h:
 

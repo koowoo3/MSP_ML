@@ -35,6 +35,7 @@ math/matrix_ops.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/includ
 math/matrix_ops.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h
 math/matrix_ops.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h
 math/matrix_ops.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h
+math/matrix_ops.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 
 ../math/matrix_ops.c:
 
@@ -105,4 +106,6 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/parameter/conv.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
