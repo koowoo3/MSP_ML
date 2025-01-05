@@ -284,13 +284,6 @@ SECTIONS
 
 }
 
-SECTIONS
-{
-    .fram_section (NOLOAD) : {
-        *(.fram_section)
-    } > FRAM2
-
-}
 
 /****************************************************************************/
 /* MPU/IPE SPECIFIC MEMORY SEGMENT DEFINITONS                               */

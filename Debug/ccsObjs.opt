@@ -3,6 +3,7 @@
 "./scheduler.obj"
 "./task1.obj"
 "./task2.obj"
+"./uart_task.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df1_q15.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df2_ext_q15.obj"
 "./DSPLib/source/filter/msp_biquad_cascade_df2_q15.obj"

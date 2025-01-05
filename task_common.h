@@ -32,7 +32,7 @@ struct Job {
 };
 
 struct TaskParameters {
-    struct Job jobs[3];
+    //struct Job jobs[3];
     TickType_t releaseTime;
     TickType_t deadline;
     int currentJob;
@@ -47,13 +47,13 @@ struct TaskParameters {
 #define TASK2_BIT (1 << 1) // Task2 실행 비트
 
 /* Task 1 and Task 2 Definitions */
-#define TASK1_PERIOD 200  // ( T = D)
-#define TASK1_DEADLINE 200
-#define TASK1_EXECUTION_TIME 20
+#define TASK1_PERIOD 2000  // ( T = D)
+#define TASK1_DEADLINE 2000
 
-#define TASK2_PERIOD 300  // ( T = D)
-#define TASK2_DEADLINE 300
-#define TASK2_EXECUTION_TIME 30
+#define TASK2_PERIOD 3000  // ( T = D)
+#define TASK2_DEADLINE 3000
+
+#define DATA_SIZE 32*32*3
 
 extern struct TaskParameters task1Params;
 extern struct TaskParameters task2Params;

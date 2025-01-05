@@ -13,41 +13,47 @@ C_SRCS += \
 ../rtc.c \
 ../scheduler.c \
 ../task1.c \
-../task2.c 
+../task2.c \
+../uart_task.c 
 
 C_DEPS += \
 ./main.d \
 ./rtc.d \
 ./scheduler.d \
 ./task1.d \
-./task2.d 
+./task2.d \
+./uart_task.d 
 
 OBJS += \
 ./main.obj \
 ./rtc.obj \
 ./scheduler.obj \
 ./task1.obj \
-./task2.obj 
+./task2.obj \
+./uart_task.obj 
 
 OBJS__QUOTED += \
 "main.obj" \
 "rtc.obj" \
 "scheduler.obj" \
 "task1.obj" \
-"task2.obj" 
+"task2.obj" \
+"uart_task.obj" 
 
 C_DEPS__QUOTED += \
 "main.d" \
 "rtc.d" \
 "scheduler.d" \
 "task1.d" \
-"task2.d" 
+"task2.d" \
+"uart_task.d" 
 
 C_SRCS__QUOTED += \
 "../main.c" \
 "../rtc.c" \
 "../scheduler.c" \
 "../task1.c" \
-"../task2.c" 
+"../task2.c" \
+"../uart_task.c" 
 
 

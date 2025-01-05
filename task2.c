@@ -94,11 +94,31 @@ void Task2(void *pvParameters){
     int16_t* block = MODEL_BLOCK_TEMP_2;
     int16_t * fc = SE_FC_2;
     int8_t ans;
+
+    struct Message msg;
+    struct TaskParameters *params = (struct TaskParameters *)pvParameters;
+
+    msg.params = params;
+    msg.status = statusCREATED;
+    params->releaseTime = xTaskGetTickCount();
+    params->deadline = params->releaseTime + TASK2_DEADLINE;
+    xQueueSend(xSchedulerMessages, &msg, 0);
+
     while(1){
 
+        xEventGroupWaitBits(xEventGroup, TASK2_BIT, pdTRUE, pdFALSE, portMAX_DELAY);
+        int8_t * data = Task2_Input;
 
-        {
-            dma_load(Task2_Input, input_buffer, INPUT_LENGTH);
+        if(params->currentJob == 0){
+            params->releaseTime = xTaskGetTickCount(); //next release time     = msg.params->startTime  + TASK2_PERIOD;
+
+            int receivedCount = 0;
+            while (receivedCount < DATA_SIZE) {
+                int8_t c = EUSCI_A_UART_receiveData(EUSCI_A0_BASE);
+                data[receivedCount] = c;
+                receivedCount++;
+            }
+            //dma_load(Task2_Input, input_buffer, INPUT_LENGTH);
 
             inputFeatures.numRows = INPUT_NUM_ROWS;
             inputFeatures.numCols = INPUT_NUM_COLS;
@@ -107,29 +127,53 @@ void Task2(void *pvParameters){
             outputLabels.numRows = OUTPUT_NUM_LABELS;
             outputLabels.numCols = LEA_RESERVED;   // one more column is reserved for LEA
             outputLabels.data = output_buffer;
+
+            params->deadline = params->releaseTime + TASK2_DEADLINE;
         }
 
-        //uart 작업 추가하기.
+        else if(params->currentJob == 1){
 
         conv(&outputLabels, &inputFeatures, conv1Params, conv1scale, 2); // matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale, task num
 
         SE_Block(32, 32, 0, 16, fc, block, 16, 1, 2); //row, col, block_number, channel, *fc, *block, fc_num, se_idx
 
         max_pooling_layer(2,2,32,32, block, 16, 193, 15, 2); //pool_numRows, pool_numCols, input_numRows, input_numCols, *block, numFil, scale, shift
+        }
 
+        else if(params->currentJob == 2){
         conv(&outputLabels, &inputFeatures, conv2Params, conv2scale, 2);
 
         SE_Block(16, 16, 0, 32, fc, block, 32, 2, 2);
 
         max_pooling_layer(2,2,16,16,block, 32, 246, 15, 2);
+        }
 
+        else if(params->currentJob == 3){
         conv(&outputLabels, &inputFeatures, conv3Params, conv3scale, 2);
 
         SE_Block(8, 8, 0, 64, fc, block, 64, 3, 2);
 
         max_pooling_layer(2,2,8,8,block, 64, 451, 15, 2);
+        }
 
+        else if(params->currentJob == 4){
         ans = dense_koo(Task2_Input,MODEL_ARRAY_TEMP);
+        _DBGUART("class is the %d\r\n", ans);
+        }
+
+        params->currentJob++;
+        if(params->currentJob >=5){
+            params->currentJob = 0;
+            TickType_t endTime = xTaskGetTickCount();
+
+            if (endTime > params->deadline) {
+                _DBGUART("Task2: DEADLINE MISS at %l (Deadline was %l)\r\n", endTime, params->deadline);
+            }
+
+        }
+
+        msg.status = statusCOMPLETED;
+        xQueueSend(xSchedulerMessages, &msg, 0);
 
     }
 

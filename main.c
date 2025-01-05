@@ -22,26 +22,27 @@
 //void vApplicationTickHook( void );
 
 struct TaskParameters task1Params = {
-    .jobs = {
-        {.executionTime = 20},
-        {.executionTime = 30},
-        {.executionTime = 30}},
+//    .jobs = {
+//        {.executionTime = 20},
+//        {.executionTime = 30},
+//        {.executionTime = 30}},
     .releaseTime = 0,
     .deadline = TASK1_DEADLINE,
     .currentJob = 0,
     .totalJobs = 3};
 
 struct TaskParameters task2Params = {
-    .jobs = {
-        {.executionTime = 10},
-        {.executionTime = 20},
-        {.executionTime = 30}},
+//    .jobs = {
+//        {.executionTime = 10},
+//        {.executionTime = 20},
+//        {.executionTime = 30}},
     .releaseTime = 0,
     .deadline = TASK2_DEADLINE,
     .currentJob = 0,
     .totalJobs = 3};
 
 void task_start( void );
+void UartStart( uint16_t usStackSize, UBaseType_t uxPriority );
 
 int main( void )
 {
@@ -50,17 +51,17 @@ int main( void )
     AB1805_init();
 
     AB1805_set_datetime(24, 8, 19, 1, 12, 34, 56);
-    while (1) {
-        AB1805_get_datetime(&rtc);
+//    while (1) {
+//        AB1805_get_datetime(&rtc);
+//
+//        _DBGUART("Date and Time: %d/%d/%d %d:%d:%d.....%d ms\r\n",
+//                 rtc._year, rtc._month, rtc._date, rtc._hour, rtc._minutes, rtc._seconds, rtc._hundredth * 10 );   //10ms 마다 값을 불러오도록 가능.
+//
+//        __delay_cycles(160000); // 10ms 대기
+//
+//    }
 
-        _DBGUART("Date and Time: %d/%d/%d %d:%d:%d.....%d ms\r\n",
-                 rtc._year, rtc._month, rtc._date, rtc._hour, rtc._minutes, rtc._seconds, rtc._hundredth * 10 );   //10ms 마다 값을 불러오도록 가능.
-
-        __delay_cycles(160000); // 10ms 대기
-
-    }
-
-    //task_start();
+    task_start();
     return 0;
 }
 
@@ -82,23 +83,25 @@ void task_start( void )
         xEventGroup = xEventGroupCreate();
         xEventGroupClearBits(xEventGroup, TASK1_BIT | TASK2_BIT);
 
+        //UartStart(( configMINIMAL_STACK_SIZE * 2 ),4);
+
         xTaskCreate(Task1,
                     "Task1",
-                    configMINIMAL_STACK_SIZE*20,
+                    configMINIMAL_STACK_SIZE*30,
                     &task1Params,
                     mainNEW_TASK_PRIORITY,
                     &task1Params.handle);
 
         xTaskCreate(Task2,
                     "Task2",
-                    configMINIMAL_STACK_SIZE*20,
+                    configMINIMAL_STACK_SIZE*30,
                     &task2Params,
                     mainNEW_TASK_PRIORITY,
                     &task2Params.handle);
 
         xTaskCreate( SchedulerTask,
                     "edf",
-                    configMINIMAL_STACK_SIZE*20,
+                    configMINIMAL_STACK_SIZE*10,
                     NULL,
                     mainSCHEDULER_PRIORITY,
                     NULL );
