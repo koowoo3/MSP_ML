@@ -47,7 +47,7 @@ void SchedulerTask( void *pvParameters )
             switch ( msg.status )
             {
             case statusCOMPLETED:
-                _DBGUART( "SCHEDULER: A task completed\r\n" );
+                //_DBGUART( "SCHEDULER: A task completed\r\n" );
                 break;
             case statusCREATED:
                 addTaskToArray( msg.params );
@@ -67,7 +67,7 @@ void SchedulerTask( void *pvParameters )
             earliestDeadline = 0xFFFFFFFFUL;
             struct TaskParameters *nextTask = NULL;
             TickType_t currentTick = xTaskGetTickCount();//xTaskGetTickCountFromISR();//
-            _DBGUART( "cur tick : %l\r\n", currentTick);
+            //_DBGUART( "cur tick : %l\r\n", currentTick);
             for (int i = 0; i < mainTASK_ARRAY_SIZE; i++) {
                 if (taskArray[i] && taskArray[i]->releaseTime <= currentTick &&
                     taskArray[i]->deadline < earliestDeadline ) {
@@ -78,10 +78,10 @@ void SchedulerTask( void *pvParameters )
 
             if (nextTask) {
                 if (nextTask == &task1Params) {
-                    _DBGUART("Scheduler: Triggering Task1\r\n");
+                    //_DBGUART("Scheduler: Triggering Task1\r\n");
                     xEventGroupSetBits(xEventGroup, TASK1_BIT);
                 } else if (nextTask == &task2Params) {
-                    _DBGUART("Scheduler: Triggering Task2\r\n");
+                    //_DBGUART("Scheduler: Triggering Task2\r\n");
                     xEventGroupSetBits(xEventGroup, TASK2_BIT);
                 }
             }

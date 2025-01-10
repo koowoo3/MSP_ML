@@ -113,12 +113,12 @@ void Task2(void *pvParameters){
             params->releaseTime = xTaskGetTickCount(); //next release time     = msg.params->startTime  + TASK2_PERIOD;
 
             int receivedCount = 0;
-            while (receivedCount < DATA_SIZE) {
-                int8_t c = EUSCI_A_UART_receiveData(EUSCI_A0_BASE);
-                data[receivedCount] = c;
-                receivedCount++;
-            }
-            //dma_load(Task2_Input, input_buffer, INPUT_LENGTH);
+//            while (receivedCount < DATA_SIZE) {
+//                int8_t c = EUSCI_A_UART_receiveData(EUSCI_A0_BASE);
+//                data[receivedCount] = c;
+//                receivedCount++;
+//            }
+            dma_load(Task2_Input, input_buffer, INPUT_LENGTH);
 
             inputFeatures.numRows = INPUT_NUM_ROWS;
             inputFeatures.numCols = INPUT_NUM_COLS;
