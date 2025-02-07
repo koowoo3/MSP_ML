@@ -40,6 +40,10 @@
 #include "task.h"
 #include "timers.h"
 #include "stack_macros.h"
+#include "myuart.h"
+
+extern TickType_t restore_tick;
+extern TickType_t elapsed_ticks;
 
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
  * because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
@@ -2037,6 +2041,16 @@ void vTaskStartScheduler( void )
         xSchedulerRunning = pdTRUE;
         xTickCount = ( TickType_t ) configINITIAL_TICK_COUNT;
 
+
+        /*this is for the harv time tick*/
+        TickType_t * temp = &restore_tick;
+        //_DBGUART("rest: %d\r\n", *temp);
+        TickType_t * t = &elapsed_ticks;
+        xTickCount = * t + *temp;
+        //_DBGUART("tick: %d\r\n", xTickCount);
+        /*this is for the harv time tick*/
+
+
         /* If configGENERATE_RUN_TIME_STATS is defined then the following
          * macro must be defined to configure the timer/counter used to generate
          * the run time counter time base.   NOTE:  If configGENERATE_RUN_TIME_STATS
@@ -2716,6 +2730,21 @@ BaseType_t xTaskCatchUpTicks( TickType_t xTicksToCatchUp )
 
 #endif /* INCLUDE_xTaskAbortDelay */
 /*----------------------------------------------------------*/
+void RESTORETick( void )
+{
+    TickType_t * temp = &restore_tick;
+    _DBGUART("rest: %d\r\n", *temp);
+    extern uint32_t GetElapsedTicks();
+
+    TickType_t * t = &elapsed_ticks;
+    * t = GetElapsedTicks();
+    xTickCount = * t + *temp;
+    _DBGUART("tick: %d\r\n", xTickCount);
+}
+
+
+
+
 
 BaseType_t xTaskIncrementTick( void )
 {

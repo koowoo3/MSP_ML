@@ -16,7 +16,7 @@
 #pragma PERSISTENT(MODEL_ARRAY_TEMP)
 int8_t MODEL_ARRAY_TEMP[] = {0};
 
-void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convscale convscale, int8_t task_num){
+void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convscale convscale, int8_t task_num, int8_t conv_num){
 
     uint16_t activation, numChannels, filter_numRows, filter_numCols, stride_numRows, stride_numCols, filters_length, padding;
     uint16_t numFilters;
@@ -92,7 +92,7 @@ void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convsca
 
     // execute conv2d layer
     if (activation == 2){ //relu
-        conv2d(output, input, &filters, numFilters, numChannels, bias_array, &fp_relu, FIXED_POINT_PRECISION, stride_numRows, stride_numCols, padding, convscale);
+        conv2d(task_num, conv_num, output, input, &filters, numFilters, numChannels, bias_array, &fp_relu, FIXED_POINT_PRECISION, stride_numRows, stride_numCols, padding, convscale);
     }
 //    else if (activation == 1){ // sigmoid
 //        conv2d(output, input, &filters, numFilters, numChannels, bias_array, &fp_sigmoid, FIXED_POINT_PRECISION, stride_numRows, stride_numCols, padding);

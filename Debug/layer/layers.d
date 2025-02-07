@@ -41,6 +41,20 @@ layer/layers.obj: ../math/matrix.h
 layer/layers.obj: ../parameter/conv.h
 layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/task_common.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/FreeRTOS.h
+layer/layers.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/FreeRTOSConfig.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/projdefs.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/portable.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/deprecated_definitions.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/portable/CCS/MSP430X/portmacro.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/mpu_wrappers.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/task.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h
+layer/layers.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h
 
 ../layer/layers.c:
 
@@ -123,4 +137,32 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/DSPLib/include/DSPLib_utility.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/task_common.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/FreeRTOS.h:
+
+C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stddef.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/FreeRTOSConfig.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/projdefs.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/portable.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/deprecated_definitions.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/portable/CCS/MSP430X/portmacro.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/mpu_wrappers.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/task.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h:
 

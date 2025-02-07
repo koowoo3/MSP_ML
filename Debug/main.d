@@ -29,6 +29,8 @@ main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/task.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/semphr.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h
+main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h
 main.obj: ../main.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
@@ -102,8 +104,6 @@ main.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/mach
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h
 main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h
 main.obj: ../task_common.h
-main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h
-main.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h
 main.obj: ../rtc.h
 
 ../main.c:
@@ -163,6 +163,10 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/semphr.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/queue.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h:
 
 ../main.h:
 
@@ -309,10 +313,6 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/math/matrix.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/driverlib/MSP430FR5xx_6xx/driverlib.h:
 
 ../task_common.h:
-
-C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/event_groups.h:
-
-C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h:
 
 ../rtc.h:
 

@@ -31,6 +31,13 @@
 QueueHandle_t xSchedulerMessages;
 EventGroupHandle_t xEventGroup;
 struct TaskParameters *taskArray[mainTASK_ARRAY_SIZE];
+extern int16_t ML_num[2][3][3];
+
+const int16_t INITIAL_VALUES[3][3] = {
+    {16,  3, 1024},  // first
+    {32, 16, 256},   // sec
+    {64, 32, 64}     // third
+};
 
 void SchedulerTask( void *pvParameters )
 {
@@ -61,6 +68,56 @@ void SchedulerTask( void *pvParameters )
             }
         }
 
+
+        if(num == 2){   //Task parameter setting.
+
+            int i;
+            for(i=0; i<2; i++){
+                int16_t (*layer)[3][3] = ML_num;
+                struct TaskParameters * t = taskArray[i];
+
+                if(t->state ==1 || t->currentJob>=5){ // if state is idle initialize the value or the task is done
+                    for(int j = 0; j<3; j++){
+                        for(int k = 0; k<3; k++){
+                            layer[i][j][k] = INITIAL_VALUES[j][k];
+                        }
+                    }
+                    t->currentJob = 0;
+                    TickType_t Time = xTaskGetTickCount();
+                    if(i == 0){
+                        if(Time > t->releaseTime + TASK1_PERIOD){
+                            t->releaseTime = Time;
+                            t->deadline = t->releaseTime + TASK1_PERIOD;
+                        }
+                    }
+                    else{
+                        if(Time > t->releaseTime + TASK2_PERIOD){
+                            t->releaseTime = Time;
+                            t->deadline = t->releaseTime + TASK2_PERIOD;
+                        }
+                    }
+                }
+
+                if(t->state == 0){ //this is the first start.
+
+                    for(int j = 0; j<3; j++){
+                        for(int k = 0; k<3; k++){
+                            layer[i][j][k] = INITIAL_VALUES[j][k];
+                        }
+                    }
+                    t->state = 1; //task is now idle.
+                    TickType_t Time = xTaskGetTickCount();
+                    if(i == 0){
+                        t->releaseTime = Time;
+                        t->deadline = t->releaseTime + TASK1_PERIOD;
+                    }
+                    else{
+                        t->releaseTime = Time;
+                        t->deadline = t->releaseTime + TASK2_PERIOD;
+                    }
+                }
+            }
+        }
 
         /* EDF */
         if(num ==2){

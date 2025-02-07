@@ -87,6 +87,7 @@ int8_t Task2_Input[20000] = {0};
 //        msg.status = statusCOMPLETED;
 //        xQueueSend(xSchedulerMessages, &msg, 0);
 //    }
+
 //}
 
 void Task2(void *pvParameters){
@@ -100,17 +101,23 @@ void Task2(void *pvParameters){
 
     msg.params = params;
     msg.status = statusCREATED;
-    params->releaseTime = xTaskGetTickCount();
-    params->deadline = params->releaseTime + TASK2_DEADLINE;
+
+    if(params->state == 0){  // task is uninitilized.
+        //params->state = 1; //task is now idle.
+        params->releaseTime = xTaskGetTickCount();
+        params->deadline = params->releaseTime + TASK2_DEADLINE;
+    }
     xQueueSend(xSchedulerMessages, &msg, 0);
 
     while(1){
 
         xEventGroupWaitBits(xEventGroup, TASK2_BIT, pdTRUE, pdFALSE, portMAX_DELAY);
+        params->state = 2; // now task is running
         int8_t * data = Task2_Input;
 
+        _DBGUART("T2 Start\r\n");
         if(params->currentJob == 0){
-            params->releaseTime = xTaskGetTickCount(); //next release time     = msg.params->startTime  + TASK2_PERIOD;
+             //next release time     = msg.params->startTime  + TASK2_PERIOD;
 
             int receivedCount = 0;
 //            while (receivedCount < DATA_SIZE) {
@@ -132,8 +139,8 @@ void Task2(void *pvParameters){
         }
 
         else if(params->currentJob == 1){
-
-        conv(&outputLabels, &inputFeatures, conv1Params, conv1scale, 2); // matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale, task num
+            _DBGUART("T2Job1 Start\r\n");
+        conv(&outputLabels, &inputFeatures, conv1Params, conv1scale, 2, 1); // matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale, task num
 
         SE_Block(32, 32, 0, 16, fc, block, 16, 1, 2); //row, col, block_number, channel, *fc, *block, fc_num, se_idx
 
@@ -141,7 +148,8 @@ void Task2(void *pvParameters){
         }
 
         else if(params->currentJob == 2){
-        conv(&outputLabels, &inputFeatures, conv2Params, conv2scale, 2);
+            _DBGUART("T2Job2 Start\r\n");
+        conv(&outputLabels, &inputFeatures, conv2Params, conv2scale, 2, 2);
 
         SE_Block(16, 16, 0, 32, fc, block, 32, 2, 2);
 
@@ -149,7 +157,8 @@ void Task2(void *pvParameters){
         }
 
         else if(params->currentJob == 3){
-        conv(&outputLabels, &inputFeatures, conv3Params, conv3scale, 2);
+            _DBGUART("T2Job3 Start\r\n");
+        conv(&outputLabels, &inputFeatures, conv3Params, conv3scale, 2, 3);
 
         SE_Block(8, 8, 0, 64, fc, block, 64, 3, 2);
 
@@ -157,20 +166,23 @@ void Task2(void *pvParameters){
         }
 
         else if(params->currentJob == 4){
+            _DBGUART("T2Job4 Start\r\n");
         ans = dense_koo(Task2_Input,MODEL_ARRAY_TEMP);
         _DBGUART("class is the %d\r\n", ans);
         }
 
+        TickType_t Time = xTaskGetTickCount();
+        if(params->deadline < Time){
+            _DBGUART("T2 D_miss\r\n");
+            params->state = 1; // if deadline is missed start again the task.
+        }
+
         params->currentJob++;
         if(params->currentJob >=5){
-            params->currentJob = 0;
-            TickType_t endTime = xTaskGetTickCount();
-
-            if (endTime > params->deadline) {
-                _DBGUART("Task2: DEADLINE MISS at %l (Deadline was %l)\r\n", endTime, params->deadline);
-            }
-
+            params->state = 1; // now state is idle.
         }
+
+
 
         msg.status = statusCOMPLETED;
         xQueueSend(xSchedulerMessages, &msg, 0);

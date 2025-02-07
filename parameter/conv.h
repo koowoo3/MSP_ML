@@ -40,7 +40,7 @@ typedef struct {
     int16_t y_zero_point;
 } Convscale;
 
-void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convscale convscale, int8_t task_num);
+void conv(matrix_8 *output, matrix_8 *input, ConvLayerParams convparams, Convscale convscale, int8_t task_num, int8_t conv_num);
 
 
 extern ConvLayerParams conv1Params;

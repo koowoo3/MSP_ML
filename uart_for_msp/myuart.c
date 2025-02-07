@@ -255,7 +255,7 @@ char *convertl(unsigned long num, int base)
 void uartinit()
 {
     FreqLevel=9;
-    if(uartsetup == 0){
+    //if(uartsetup == 0){
         // Configure UART
         EUSCI_A_UART_initParam param = UartParams[FreqLevel-1];
 
@@ -279,7 +279,7 @@ void uartinit()
         // UART RX 핀 설정 (P2.1, 실제 사용되는 핀으로 변경 필요)
         GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P2, GPIO_PIN1, GPIO_SECONDARY_MODULE_FUNCTION);
         uartsetup = 1;
-    }
+    //}
 }
 
 

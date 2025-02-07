@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Jan 10 21:56:28 2025
+>> Linked Tue Feb  4 14:31:51 2025
 
 OUTPUT FILE NAME:   <ML_int8.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000412a
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 000040e6
 
 
 MEMORY CONFIGURATION
@@ -17,10 +17,10 @@ MEMORY CONFIGURATION
   INFOC                 00001880   00000080  00000000  00000080  RWIX
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
-  RAM                   00001c00   00001000  00000368  00000c98  RWIX
+  RAM                   00001c00   00001000  0000037e  00000c82  RWIX
   LEARAM                00002c00   00000ec8  00000ec4  00000004  RWIX
   LEASTACK              00003ac8   00000138  00000000  00000138  RWIX
-  FRAM                  00004000   0000bf80  000005ba  0000b9c6  RWIX
+  FRAM                  00004000   0000bf80  000005c6  0000b9ba  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   IPESIGNATURE          0000ff88   00000008  00000008  00000000  RWIX  ffff 
@@ -80,7 +80,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00033ff8  0002bb64  00008494  RWIX
+  FRAM2                 00010000   00033ff8  00029e10  0000a1e8  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -88,7 +88,7 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.data      0    00001c00    000001ec     UNINITIALIZED
+.data      0    00001c00    000001d6     UNINITIALIZED
                   00001c00    00000090     myuart.obj (.data:UartParams)
                   00001c90    0000002c     tasks.obj (.data)
                   00001cbc    00000014     rtc.obj (.data:ReceiveBuffer)
@@ -101,24 +101,24 @@ section   page    origin      length       input sections
                   00001d45    00000001     --HOLE--
                   00001d46    00000011     myuart.obj (.data:Representation$4)
                   00001d57    00000001     --HOLE--
-                  00001d58    00000010     main.obj (.data:task1Params)
-                  00001d68    00000010     main.obj (.data:task2Params)
-                  00001d78    0000000c     main.obj (.data)
-                  00001d84    0000000a     dense.obj (.data:SE_1_1)
-                  00001d8e    0000000a     dense.obj (.data:SE_1_2)
-                  00001d98    0000000a     dense.obj (.data:SE_2_1)
-                  00001da2    0000000a     dense.obj (.data:SE_2_2)
-                  00001dac    0000000a     dense.obj (.data:SE_3_1)
-                  00001db6    0000000a     dense.obj (.data:SE_3_2)
-                  00001dc0    00000008     avg_pool.obj (.data:SE_1)
-                  00001dc8    00000008     avg_pool.obj (.data:SE_2)
-                  00001dd0    00000008     avg_pool.obj (.data:SE_3)
-                  00001dd8    00000007     rtc.obj (.data)
-                  00001ddf    00000001     --HOLE--
-                  00001de0    00000004     avg_pool.obj (.data)
-                  00001de4    00000004     task1.obj (.data)
-                  00001de8    00000002     port.obj (.data)
-                  00001dea    00000002     rts430x_lc_ld_eabi.lib : errno.c.obj (.data)
+                  00001d58    0000000c     timers.obj (.data)
+                  00001d64    0000000a     dense.obj (.data:SE_1_1)
+                  00001d6e    0000000a     dense.obj (.data:SE_1_2)
+                  00001d78    0000000a     dense.obj (.data:SE_2_1)
+                  00001d82    0000000a     dense.obj (.data:SE_2_2)
+                  00001d8c    0000000a     dense.obj (.data:SE_3_1)
+                  00001d96    0000000a     dense.obj (.data:SE_3_2)
+                  00001da0    00000009     main.obj (.data)
+                  00001da9    00000001     --HOLE--
+                  00001daa    00000008     avg_pool.obj (.data:SE_1)
+                  00001db2    00000008     avg_pool.obj (.data:SE_2)
+                  00001dba    00000008     avg_pool.obj (.data:SE_3)
+                  00001dc2    00000007     rtc.obj (.data)
+                  00001dc9    00000001     --HOLE--
+                  00001dca    00000004     avg_pool.obj (.data)
+                  00001dce    00000004     task1.obj (.data)
+                  00001dd2    00000002     port.obj (.data)
+                  00001dd4    00000002     rts430x_lc_ld_eabi.lib : errno.c.obj (.data)
 
 .cio       0    00004000    00000000     UNINITIALIZED
 
@@ -137,84 +137,91 @@ section   page    origin      length       input sections
 
 .binit     0    00004000    00000000     
 
-.cinit     0    00004406    00000114     
-                  00004406    000000e4     (.cinit..data.load) [load image, compression = lzss]
-                  000044ea    0000000c     (__TI_handler_table)
-                  000044f6    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  000044fc    00000006     (.cinit..leaRAM.load) [load image, compression = zero_init]
-                  00004502    00000018     (__TI_cinit_table)
+.cinit     0    00004424    00000102     
+                  00004424    000000d2     (.cinit..data.load) [load image, compression = lzss]
+                  000044f6    0000000c     (__TI_handler_table)
+                  00004502    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  00004508    00000006     (.cinit..leaRAM.load) [load image, compression = zero_init]
+                  0000450e    00000018     (__TI_cinit_table)
 
 .TI.persistent 
-*          0    00010000    00021bea     
-                  00010000    00007800     main.obj (.TI.persistent:ucHeap)
-                  00017800    00004e20     conv.obj (.TI.persistent:MODEL_ARRAY_TEMP)
-                  0001c620    00004e20     task1.obj (.TI.persistent:Task1_Input)
-                  00021440    00004e20     task2.obj (.TI.persistent:Task2_Input)
-                  00026260    00004800     conv_parameter.obj (.TI.persistent:conv3_weight)
-                  0002aa60    00002800     dense.obj (.TI.persistent:fc_weight)
-                  0002d260    00001200     conv_parameter.obj (.TI.persistent:conv2_weight)
-                  0002e460    00001000     layers.obj (.TI.persistent:FILTER_BUFFER)
-                  0002f460    00000c00     task1.obj (.TI.persistent:input_buffer)
-                  00030060    00000c00     task2.obj (.TI.persistent:input_buffer)
-                  00030c60    00000800     layers.obj (.TI.persistent:PADDING_BUFFER)
-                  00031460    000001b0     conv_parameter.obj (.TI.persistent:conv1_weight)
-                  00031610    00000100     dense.obj (.TI.persistent:se3_fc1_weight)
-                  00031710    00000100     dense.obj (.TI.persistent:se3_fc2_weight)
-                  00031810    000000c8     task1.obj (.TI.persistent:MODEL_BLOCK_TEMP_1)
-                  000318d8    000000c8     task2.obj (.TI.persistent:MODEL_BLOCK_TEMP_2)
-                  000319a0    00000080     conv_parameter.obj (.TI.persistent:conv3_bias)
-                  00031a20    00000040     conv_parameter.obj (.TI.persistent:conv2_bias)
-                  00031a60    00000040     dense.obj (.TI.persistent:se2_fc1_weight)
-                  00031aa0    00000040     dense.obj (.TI.persistent:se2_fc2_weight)
-                  00031ae0    00000020     conv_parameter.obj (.TI.persistent:conv1_bias)
-                  00031b00    00000018     conv_parameter.obj (.TI.persistent:conv1Params)
-                  00031b18    00000018     conv_parameter.obj (.TI.persistent:conv2Params)
-                  00031b30    00000018     conv_parameter.obj (.TI.persistent:conv3Params)
-                  00031b48    00000014     task1.obj (.TI.persistent:SE_FC_1)
-                  00031b5c    00000014     task2.obj (.TI.persistent:SE_FC_2)
-                  00031b70    00000014     dense.obj (.TI.persistent:fc_bias)
-                  00031b84    00000014     task1.obj (.TI.persistent:output_buffer)
-                  00031b98    00000014     task2.obj (.TI.persistent:output_buffer)
-                  00031bac    00000010     dense.obj (.TI.persistent:se1_fc1_weight)
-                  00031bbc    00000010     dense.obj (.TI.persistent:se1_fc2_weight)
-                  00031bcc    0000000a     conv_parameter.obj (.TI.persistent:conv1scale)
-                  00031bd6    0000000a     conv_parameter.obj (.TI.persistent:conv2scale)
-                  00031be0    0000000a     conv_parameter.obj (.TI.persistent:conv3scale)
+*          0    00010000    0001f44c     
+                  00010000    00005000     main.obj (.TI.persistent:ucHeap)
+                  00015000    00004e20     conv.obj (.TI.persistent:MODEL_ARRAY_TEMP)
+                  00019e20    00004e20     task1.obj (.TI.persistent:Task1_Input)
+                  0001ec40    00004e20     task2.obj (.TI.persistent:Task2_Input)
+                  00023a60    00004800     conv_parameter.obj (.TI.persistent:conv3_weight)
+                  00028260    00002800     dense.obj (.TI.persistent:fc_weight)
+                  0002aa60    00001200     conv_parameter.obj (.TI.persistent:conv2_weight)
+                  0002bc60    00001000     layers.obj (.TI.persistent:FILTER_BUFFER)
+                  0002cc60    00000c00     task1.obj (.TI.persistent:input_buffer)
+                  0002d860    00000c00     task2.obj (.TI.persistent:input_buffer)
+                  0002e460    00000800     layers.obj (.TI.persistent:PADDING_BUFFER)
+                  0002ec60    000001b0     conv_parameter.obj (.TI.persistent:conv1_weight)
+                  0002ee10    00000100     dense.obj (.TI.persistent:se3_fc1_weight)
+                  0002ef10    00000100     dense.obj (.TI.persistent:se3_fc2_weight)
+                  0002f010    000000c8     task1.obj (.TI.persistent:MODEL_BLOCK_TEMP_1)
+                  0002f0d8    000000c8     task2.obj (.TI.persistent:MODEL_BLOCK_TEMP_2)
+                  0002f1a0    00000080     conv_parameter.obj (.TI.persistent:conv3_bias)
+                  0002f220    00000040     conv_parameter.obj (.TI.persistent:conv2_bias)
+                  0002f260    00000040     dense.obj (.TI.persistent:se2_fc1_weight)
+                  0002f2a0    00000040     dense.obj (.TI.persistent:se2_fc2_weight)
+                  0002f2e0    00000024     layers.obj (.TI.persistent:ML_num)
+                  0002f304    00000020     conv_parameter.obj (.TI.persistent:conv1_bias)
+                  0002f324    00000018     conv_parameter.obj (.TI.persistent:conv1Params)
+                  0002f33c    00000018     conv_parameter.obj (.TI.persistent:conv2Params)
+                  0002f354    00000018     conv_parameter.obj (.TI.persistent:conv3Params)
+                  0002f36c    00000014     task1.obj (.TI.persistent:SE_FC_1)
+                  0002f380    00000014     task2.obj (.TI.persistent:SE_FC_2)
+                  0002f394    00000014     dense.obj (.TI.persistent:fc_bias)
+                  0002f3a8    00000014     task1.obj (.TI.persistent:output_buffer)
+                  0002f3bc    00000014     task2.obj (.TI.persistent:output_buffer)
+                  0002f3d0    00000012     main.obj (.TI.persistent:task1Params)
+                  0002f3e2    00000012     main.obj (.TI.persistent:task2Params)
+                  0002f3f4    00000010     main.obj (.TI.persistent:end_time)
+                  0002f404    00000010     dense.obj (.TI.persistent:se1_fc1_weight)
+                  0002f414    00000010     dense.obj (.TI.persistent:se1_fc2_weight)
+                  0002f424    0000000a     conv_parameter.obj (.TI.persistent:conv1scale)
+                  0002f42e    0000000a     conv_parameter.obj (.TI.persistent:conv2scale)
+                  0002f438    0000000a     conv_parameter.obj (.TI.persistent:conv3scale)
+                  0002f442    0000000a     main.obj (.TI.persistent)
 
 .init_array 
 *          0    00004000    00000000     UNINITIALIZED
 
 .text:_isr 
-*          0    00004000    0000018e     
+*          0    00004000    0000014a     
                   00004000    000000e6     rtc.obj (.text:_isr:USCI_B2_ISR)
-                  000040e6    00000044     main.obj (.text:_isr:ADC12_ISR)
-                  0000412a    0000001c     rts430x_lc_ld_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
-                  00004146    0000001c     msp_lea_isr.obj (.text:_isr:msp_lea_isr)
-                  00004162    00000014     main.obj (.text:_isr:v4RunTimeStatsTimerOverflow)
-                  00004176    00000010     port.obj (.text:_isr:vTickISREntry)
-                  00004186    00000008     rts430x_lc_ld_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  000040e6    0000001c     rts430x_lc_ld_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
+                  00004102    0000001c     msp_lea_isr.obj (.text:_isr:msp_lea_isr)
+                  0000411e    00000014     main.obj (.text:_isr:v4RunTimeStatsTimerOverflow)
+                  00004132    00000010     port.obj (.text:_isr:vTickISREntry)
+                  00004142    00000008     rts430x_lc_ld_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
-.bss       0    00001dec    0000017c     UNINITIALIZED
-                  00001dec    0000005a     tasks.obj (.bss:pxReadyTasksLists)
-                  00001e46    00000032     myuart.obj (.bss:buffer$2)
-                  00001e78    00000032     myuart.obj (.bss:buffer$5)
-                  00001eaa    00000020     myuart.obj (.bss:buffer$3)
-                  00001eca    00000012     tasks.obj (.bss:xDelayedTaskList1)
-                  00001edc    00000012     tasks.obj (.bss:xDelayedTaskList2)
-                  00001eee    00000012     tasks.obj (.bss:xPendingReadyList)
-                  00001f00    00000012     tasks.obj (.bss:xSuspendedTaskList)
-                  00001f12    00000012     tasks.obj (.bss:xTasksWaitingTermination)
-                  00001f24    00000008     task1.obj (.bss:inputFeatures)
-                  00001f2c    00000008     task2.obj (.bss:inputFeatures)
-                  00001f34    00000008     task1.obj (.bss:outputLabels)
-                  00001f3c    00000008     task2.obj (.bss:outputLabels)
-                  00001f44    00000008     tasks.obj (.bss)
-                  00001f4c    00000008     heap_4.obj (.bss:xStart)
-                  00001f54    00000008     (.common:taskArray)
-                  00001f5c    00000004     (.common:xEventGroup)
-                  00001f60    00000004     (.common:xSchedulerMessages)
-                  00001f64    00000002     (.common:msp_lea_ifg)
-                  00001f66    00000002     (.common:msp_lea_locked)
+.bss       0    00001dd6    000001a8     UNINITIALIZED
+                  00001dd6    0000005a     tasks.obj (.bss:pxReadyTasksLists)
+                  00001e30    00000032     myuart.obj (.bss:buffer$2)
+                  00001e62    00000032     myuart.obj (.bss:buffer$5)
+                  00001e94    00000020     myuart.obj (.bss:buffer$3)
+                  00001eb4    00000012     timers.obj (.bss:xActiveTimerList1)
+                  00001ec6    00000012     timers.obj (.bss:xActiveTimerList2)
+                  00001ed8    00000012     tasks.obj (.bss:xDelayedTaskList1)
+                  00001eea    00000012     tasks.obj (.bss:xDelayedTaskList2)
+                  00001efc    00000012     tasks.obj (.bss:xPendingReadyList)
+                  00001f0e    00000012     tasks.obj (.bss:xSuspendedTaskList)
+                  00001f20    00000012     tasks.obj (.bss:xTasksWaitingTermination)
+                  00001f32    00000008     task1.obj (.bss:inputFeatures)
+                  00001f3a    00000008     task2.obj (.bss:inputFeatures)
+                  00001f42    00000008     task1.obj (.bss:outputLabels)
+                  00001f4a    00000008     task2.obj (.bss:outputLabels)
+                  00001f52    00000008     tasks.obj (.bss)
+                  00001f5a    00000008     timers.obj (.bss)
+                  00001f62    00000008     heap_4.obj (.bss:xStart)
+                  00001f6a    00000008     (.common:taskArray)
+                  00001f72    00000004     (.common:xEventGroup)
+                  00001f76    00000004     (.common:xSchedulerMessages)
+                  00001f7a    00000002     (.common:msp_lea_ifg)
+                  00001f7c    00000002     (.common:msp_lea_locked)
 
 .stack     0    0000fee0    000000a0     UNINITIALIZED
                   0000fee0    00000004     rts430x_lc_ld_eabi.lib : boot.c.obj (.stack)
@@ -327,7 +334,7 @@ TIMER0_A0
                   0000ffea    00000002     port.obj (.int45)
 
 ADC12_B    0    0000ffec    00000002     
-                  0000ffec    00000002     main.obj (.int46)
+                  0000ffec    00000002     rts430x_lc_ld_eabi.lib : int46.asm.obj (.int46)
 
 EUSCI_B0   0    0000ffee    00000002     
                   0000ffee    00000002     rts430x_lc_ld_eabi.lib : int47.asm.obj (.int47)
@@ -358,232 +365,260 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_ld_eabi.lib : boot.c.obj (.reset)
 
-.const     0    0000418e    00000278     
-                  0000418e    00000101     rts430x_lc_ld_eabi.lib : ctype.c.obj (.const:.string:_ctypes_)
-                  0000428f    00000001     --HOLE-- [fill = 0]
-                  00004290    00000042     task1.obj (.const:.string)
-                  000042d2    00000042     task2.obj (.const:.string)
-                  00004314    00000032     tasks.obj (.const:.string)
-                  00004346    00000026     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.const:.string)
-                  0000436c    0000001c     gpio.obj (.const:GPIO_PORT_TO_BASE)
-                  00004388    00000010     main.obj (.const:.string)
-                  00004398    00000010     rts430x_lc_ld_eabi.lib : e_pow.c.obj (.const:bp)
-                  000043a8    00000010                            : e_pow.c.obj (.const:dp_h)
-                  000043b8    00000010                            : e_pow.c.obj (.const:dp_l)
-                  000043c8    00000010                            : e_exp.c.obj (.const:halF)
-                  000043d8    00000010                            : e_exp.c.obj (.const:ln2HI)
-                  000043e8    00000010                            : e_exp.c.obj (.const:ln2LO)
-                  000043f8    00000008     myuart.obj (.const:.string)
-                  00004400    00000004     matrix_ops.obj (.const)
-                  00004404    00000002     tasks.obj (.const)
+.const     0    0000414a    000002da     
+                  0000414a    00000101     rts430x_lc_ld_eabi.lib : ctype.c.obj (.const:.string:_ctypes_)
+                  0000424b    00000001     --HOLE-- [fill = 0]
+                  0000424c    0000006a     task2.obj (.const:.string)
+                  000042b6    0000004a     tasks.obj (.const:.string)
+                  00004300    0000003e     task1.obj (.const:.string)
+                  0000433e    00000026     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.const:.string)
+                  00004364    0000001c     main.obj (.const:.string)
+                  00004380    0000001c     gpio.obj (.const:GPIO_PORT_TO_BASE)
+                  0000439c    00000012     scheduler.obj (.const:INITIAL_VALUES)
+                  000043ae    00000010     rts430x_lc_ld_eabi.lib : e_pow.c.obj (.const:bp)
+                  000043be    00000010                            : e_pow.c.obj (.const:dp_h)
+                  000043ce    00000010                            : e_pow.c.obj (.const:dp_l)
+                  000043de    00000010                            : e_exp.c.obj (.const:halF)
+                  000043ee    00000010                            : e_exp.c.obj (.const:ln2HI)
+                  000043fe    00000010                            : e_exp.c.obj (.const:ln2LO)
+                  0000440e    00000008     myuart.obj (.const:.string)
+                  00004416    00000008     timers.obj (.const:.string)
+                  0000441e    00000004     matrix_ops.obj (.const)
+                  00004422    00000002     tasks.obj (.const)
 
-.text      0    00031bea    00009f7a     
-                  00031bea    0000114c     rts430x_lc_ld_eabi.lib : e_pow.c.obj (.text:pow)
-                  00032d36    0000072a                            : addd.c.obj (.text:__mspabi_addd)
-                  00033460    00000528                            : e_exp.c.obj (.text:exp)
-                  00033988    00000468                            : frcdivd.c.obj (.text:__TI_frcdivd)
-                  00033df0    0000034e                            : div64u.c.obj (.text:__mspabi_divull)
-                  0003413e    000002e2     layers.obj (.text:filters_sum)
-                  00034420    000002de     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_setfield___TI_printfi)
-                  000346fe    000002dc                            : e_sqrt.c.obj (.text:sqrt)
-                  000349da    000002ae                            : _printfi.c.obj (.text:__TI_printfi:__TI_printfi)
-                  00034c88    0000029c     task1.obj (.text:Task1)
-                  00034f24    0000029c     task2.obj (.text:Task2)
-                  000351c0    00000292     rts430x_lc_ld_eabi.lib : mpyd.c.obj (.text:__mspabi_mpyd)
-                  00035452    00000268                            : _printfi.c.obj (.text:_pproc_fgea)
-                  000356ba    00000228     conv.obj (.text:conv)
-                  000358e2    00000224     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:acvt)
-                  00035b06    0000021c                            : divd.c.obj (.text:__mspabi_divd)
-                  00035d22    00000206                            : _printfi.c.obj (.text:__TI_printfi:_getarg_diouxp___TI_printfi)
-                  00035f28    000001e6                            : _printfi.c.obj (.text:ecvt)
-                  0003610e    000001d8     tasks.obj (.text:xTaskIncrementTick)
-                  000362e6    000001ce     msp_matrix_mpy_q15.obj (.text:msp_matrix_mpy_q15)
-                  000364b4    000001c8     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:fcvt)
-                  0003667c    000001c4                            : s_floor.c.obj (.text:floor)
-                  00036840    000001b6     avg_pool.obj (.text:global_avg_pool)
-                  000369f6    000001ae     matrix_ops.obj (.text:filter_im2col)
-                  00036ba4    000001aa     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_e)
-                  00036d4e    00000198     queue.obj (.text:xQueueGenericSend)
-                  00036ee6    0000018e     event_groups.obj (.text:xEventGroupWaitBits)
-                  00037074    0000018c     dense.obj (.text:se1_fc2)
-                  00037200    0000018c     tasks.obj (.text:xTaskResumeAll)
-                  0003738c    00000182     queue.obj (.text:xQueueReceive)
-                  0003750e    00000170     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_a)
-                  0003767e    00000166     layers.obj (.text:maxpooling_with_importance)
-                  000377e4    00000164     rts430x_lc_ld_eabi.lib : frcmpyd.c.obj (.text:__TI_frcmpyd)
-                  00037948    00000164     dense.obj (.text:sigmoid)
-                  00037aac    0000015e     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_ltostr___TI_printfi)
-                  00037c0a    0000015a                            : s_scalbn.c.obj (.text:scalbn)
-                  00037d64    00000158     dense.obj (.text:dense_koo)
-                  00037ebc    0000014e     layers.obj (.text:conv2d)
-                  0003800a    0000014e     dense.obj (.text:se1_fc1)
-                  00038158    0000014c     heap_4.obj (.text:pvPortMalloc)
-                  000382a4    0000014c     tasks.obj (.text:xTaskRemoveFromEventList)
-                  000383f0    00000148     myuart.obj (.text:_DBGUART)
-                  00038538    00000148     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_pproc_diouxp___TI_printfi)
-                  00038680    00000140     cs.obj (.text:CS_setDCOFreq)
-                  000387c0    00000132     rts430x_lc_ld_eabi.lib : fs_add.asm.obj (.text)
-                  000388f2    00000132     tasks.obj (.text:vTaskSwitchContext)
-                  00038a24    0000012c     main.obj (.text:boardSetup)
-                  00038b50    0000011c     tasks.obj (.text:vTaskRemoveFromUnorderedEventList)
-                  00038c6c    00000106     rts430x_lc_ld_eabi.lib : s_round.c.obj (.text:round)
-                  00038d72    00000100     event_groups.obj (.text:xEventGroupSetBits)
-                  00038e72    000000fc     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_g)
-                  00038f6e    000000fc     tasks.obj (.text:prvInitialiseNewTask)
-                  0003906a    000000f6     layers.obj (.text:padding_same)
-                  00039160    000000ea     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_pproc_fwp___TI_printfi)
-                  0003924a    000000e2     tasks.obj (.text:prvAddNewTaskToReadyList)
-                  0003932c    000000de     queue.obj (.text:xQueueGenericReset)
-                  0003940a    000000dc     max_pooling.obj (.text:max_pooling_layer)
-                  000394e6    000000d8     rts430x_lc_ld_eabi.lib : cmpd.c.obj (.text:__mspabi_cmpd)
-                  000395be    000000d6                            : _printfi.c.obj (.text:__TI_printfi:_pproc_wstr___TI_printfi)
-                  00039694    000000d0     tasks.obj (.text:xTaskPriorityDisinherit)
-                  00039764    000000ce     scheduler.obj (.text:SchedulerTask)
-                  00039832    000000c4     tasks.obj (.text:prvAddCurrentTaskToDelayedList)
-                  000398f6    000000b8     matrix_ops.obj (.text:matrix32_add)
-                  000399ae    000000b8     rts430x_lc_ld_eabi.lib : fs_mpy.asm.obj (.text)
-                  00039a66    000000b4                            : _printfi.c.obj (.text:__TI_printfi:_pproc_str___TI_printfi)
-                  00039b1a    000000b4                            : _printfi.c.obj (.text:_mcpy)
-                  00039bce    000000b4     myuart.obj (.text:setFrequency)
-                  00039c82    000000b2     rts430x_lc_ld_eabi.lib : cvtdf.c.obj (.text:__mspabi_cvtdf)
-                  00039d34    000000ac     heap_4.obj (.text:prvHeapInit)
-                  00039de0    000000aa     layers.obj (.text:maxpooling_filters)
-                  00039e8a    000000a6     rts430x_lc_ld_eabi.lib : s_frexp.c.obj (.text:frexp)
-                  00039f30    000000a6     portext.obj (.text)
-                  00039fd6    000000a4     tasks.obj (.text:xTaskCheckForTimeOut)
-                  0003a07a    000000a0     queue.obj (.text:prvUnlockQueue)
-                  0003a11a    0000009e     rts430x_lc_ld_eabi.lib : fltlid.c.obj (.text:__mspabi_fltlid)
-                  0003a1b8    0000009e     queue.obj (.text:prvCopyDataToQueue)
-                  0003a256    0000009a     eusci_a_uart.obj (.text:EUSCI_A_UART_init)
-                  0003a2f0    00000098     main.obj (.text:task_start)
-                  0003a388    00000096     rts430x_lc_ld_eabi.lib : _ltoa.c.obj (.text:__TI_ltoa)
-                  0003a41e    00000096     tasks.obj (.text:xTaskCreate)
-                  0003a4b4    00000090     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_ecpy)
-                  0003a544    00000086     tasks.obj (.text:vTaskPlaceOnUnorderedEventList)
-                  0003a5ca    0000007a     myuart.obj (.text:convertFloat)
-                  0003a644    00000078     rts430x_lc_ld_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  0003a6bc    00000078                            : _printfi.c.obj (.text:_pconv_f)
-                  0003a734    00000078                            : snprintf.c.obj (.text:snprintf)
-                  0003a7ac    00000076                            : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0003a822    00000072     gpio.obj (.text:GPIO_setAsPeripheralModuleFunctionInputPin)
-                  0003a894    00000072     gpio.obj (.text:GPIO_setAsPeripheralModuleFunctionOutputPin)
-                  0003a906    00000072     heap_4.obj (.text:prvInsertBlockIntoFreeList)
-                  0003a978    00000070     myuart.obj (.text:uartinit)
-                  0003a9e8    0000006e     queue.obj (.text:xQueueGenericCreate)
-                  0003aa56    0000006c     rts430x_lc_ld_eabi.lib : snprintf.c.obj (.text:_outs)
-                  0003aac2    0000006a     cs.obj (.text:CS_initClockSignal)
-                  0003ab2c    0000006a     heap_4.obj (.text:vPortFree)
-                  0003ab96    00000068     rts430x_lc_ld_eabi.lib : fs_toi.asm.obj (.text)
-                  0003abfe    00000066                            : fixdli.c.obj (.text:__mspabi_fixdli)
-                  0003ac64    00000062                            : atoi.c.obj (.text:atoi)
-                  0003acc6    00000062     tasks.obj (.text:prvInitialiseTaskLists)
-                  0003ad28    00000060     matrix_ops.obj (.text:msp_checkStatus)
-                  0003ad88    0000005e     tasks.obj (.text:vTaskStartScheduler)
-                  0003ade6    0000005e     event_groups.obj (.text:xEventGroupClearBits)
-                  0003ae44    0000005c     rts430x_lc_ld_eabi.lib : mult64_f5hw.asm.obj (.text:__mpyll)
-                  0003aea0    00000058                            : div32u.asm.obj (.text)
-                  0003aef8    00000054     list.obj (.text:vListInsert)
-                  0003af4c    00000052     rtc.obj (.text:I2C_Master_WriteReg)
-                  0003af9e    00000050     tasks.obj (.text:prvCheckTasksWaitingTermination)
-                  0003afee    0000004e     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_fcpy)
-                  0003b03c    0000004e     msp_lea_init.obj (.text:msp_lea_init)
-                  0003b08a    0000004c     myuart.obj (.text:convertl)
-                  0003b0d6    0000004a     block.obj (.text:SE_Block)
-                  0003b120    00000040     rtc.obj (.text:AB1805_set_datetime)
-                  0003b160    00000040     rts430x_lc_ld_eabi.lib : asr64.c.obj (.text:__mspabi_srall)
-                  0003b1a0    00000040                            : div32s.asm.obj (.text)
-                  0003b1e0    0000003e                            : asr32.asm.obj (.text:l_asr_const)
-                  0003b21e    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
-                  0003b25c    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
-                  0003b29a    0000003c                            : memcpy.c.obj (.text:memcpy)
-                  0003b2d6    0000003a                            : lsl64.c.obj (.text:__mspabi_sllll)
-                  0003b310    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
-                  0003b34a    0000003a     main.obj (.text:main)
-                  0003b384    0000003a     list.obj (.text:uxListRemove)
-                  0003b3be    00000036     rts430x_lc_ld_eabi.lib : fs_itof.asm.obj (.text)
-                  0003b3f4    00000034                            : memccpy.c.obj (.text:memccpy)
-                  0003b428    00000034     queue.obj (.text:prvCopyDataFromQueue)
-                  0003b45c    00000032     rts430x_lc_ld_eabi.lib : subd.c.obj (.text:__mspabi_subd)
-                  0003b48e    00000032     myuart.obj (.text:convert)
-                  0003b4c0    00000032     matrix_ops.obj (.text:dma_load)
-                  0003b4f2    00000030     event_groups.obj (.text:prvTestWaitCondition)
-                  0003b522    00000030     tasks.obj (.text:vTaskPlaceOnEventList)
-                  0003b552    0000002e     rtc.obj (.text:AB1805_init)
-                  0003b580    0000002e     rts430x_lc_ld_eabi.lib : negd.c.obj (.text:__mspabi_negd)
-                  0003b5ae    0000002e                            : snprintf.c.obj (.text:_outc)
-                  0003b5dc    0000002e                            : s_copysign.c.obj (.text:copysign)
-                  0003b60a    0000002e     queue.obj (.text:prvIsQueueFull)
-                  0003b638    0000002c     rts430x_lc_ld_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
-                  0003b664    0000002c     queue.obj (.text:prvIsQueueEmpty)
-                  0003b690    0000002c     rts430x_lc_ld_eabi.lib : div16s.asm.obj (.text)
-                  0003b6bc    0000002c     list.obj (.text:vListInitialise)
-                  0003b6e8    0000002a     queue.obj (.text:prvInitialiseNewQueue)
-                  0003b712    0000002a     tasks.obj (.text:uxTaskResetEventItemValue)
-                  0003b73c    00000028     rts430x_lc_ld_eabi.lib : fixdi.c.obj (.text:__mspabi_fixdi)
-                  0003b764    00000028     tasks.obj (.text:prvResetNextTaskUnblockTime)
-                  0003b78c    00000028     rts430x_lc_ld_eabi.lib : wcslen.c.obj (.text:wcslen)
-                  0003b7b4    00000028     tasks.obj (.text:xTaskGetTickCount)
-                  0003b7dc    00000026     main.obj (.text:vApplicationSetupTimerInterrupt)
-                  0003b802    00000026     event_groups.obj (.text:xEventGroupCreate)
-                  0003b828    00000024     scheduler.obj (.text:addTaskToArray)
-                  0003b84c    00000024     rts430x_lc_ld_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init)
-                  0003b870    00000024     port.obj (.text:pxPortInitialiseStack)
-                  0003b894    00000024     rts430x_lc_ld_eabi.lib : mult32_f5hw.asm.obj (.text)
-                  0003b8b8    00000022     eusci_a_uart.obj (.text:EUSCI_A_UART_transmitData)
-                  0003b8da    00000020     rts430x_lc_ld_eabi.lib : memset.c.obj (.text:memset)
-                  0003b8fa    0000001c     rtc.obj (.text:CopyArray)
-                  0003b916    0000001c     rts430x_lc_ld_eabi.lib : strchr.c.obj (.text:strchr)
-                  0003b932    0000001a     rtc.obj (.text:AB1805_write_rtc_register)
-                  0003b94c    00000018     rtc.obj (.text:AB1805_set_day)
-                  0003b964    00000018     rtc.obj (.text:AB1805_set_hour)
-                  0003b97c    00000018     rtc.obj (.text:AB1805_set_month)
-                  0003b994    00000018     rts430x_lc_ld_eabi.lib : mult16_f5hw.asm.obj (.text)
-                  0003b9ac    00000018     tasks.obj (.text:xTaskGetSchedulerState)
-                  0003b9c4    00000016     rtc.obj (.text:AB1805_set_date)
-                  0003b9da    00000016     rtc.obj (.text:AB1805_set_minute)
-                  0003b9f0    00000016     rtc.obj (.text:AB1805_set_second)
-                  0003ba06    00000016     rts430x_lc_ld_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0003ba1c    00000016     tasks.obj (.text:prvDeleteTCB)
-                  0003ba32    00000016     tasks.obj (.text:prvIdleTask)
-                  0003ba48    00000016     rts430x_lc_ld_eabi.lib : div16u.asm.obj (.text)
-                  0003ba5e    00000014     tasks.obj (.text:vTaskInternalSetTimeOutState)
-                  0003ba72    00000012     rts430x_lc_ld_eabi.lib : strlen.c.obj (.text:strlen)
-                  0003ba84    00000012                            : toupper.c.obj (.text:toupper)
-                  0003ba96    00000010                            : asr32.asm.obj (.text:l_asr)
-                  0003baa6    00000010                            : lsl32.asm.obj (.text:l_lsl)
-                  0003bab6    00000010                            : lsr32.asm.obj (.text:l_lsr)
-                  0003bac6    00000010     main.obj (.text:vConfigureTimerForRunTimeStats)
-                  0003bad6    0000000c     rtc.obj (.text:AB1805_set_year)
-                  0003bae2    0000000c     eusci_a_uart.obj (.text:EUSCI_A_UART_clearInterrupt)
-                  0003baee    0000000c     rts430x_lc_ld_eabi.lib : fltid.c.obj (.text:__mspabi_fltid)
-                  0003bafa    0000000c     main.obj (.text:vApplicationIdleHook)
-                  0003bb06    0000000a     rts430x_lc_ld_eabi.lib : abs.c.obj (.text:abs)
-                  0003bb10    0000000a                            : lsl16.asm.obj (.text)
-                  0003bb1a    0000000a     main.obj (.text:vApplicationMallocFailedHook)
-                  0003bb24    0000000a     main.obj (.text:vApplicationStackOverflowHook)
-                  0003bb2e    00000008     fixed_point_ops.obj (.text:fp_relu)
-                  0003bb36    00000008     list.obj (.text:vListInitialiseItem)
-                  0003bb3e    00000006     eusci_a_uart.obj (.text:EUSCI_A_UART_enable)
-                  0003bb44    00000006     pmm.obj (.text:PMM_unlockLPM5)
-                  0003bb4a    00000006     rts430x_lc_ld_eabi.lib : exit.c.obj (.text:abort)
-                  0003bb50    00000006     tasks.obj (.text:vTaskMissedYield)
-                  0003bb56    00000006     tasks.obj (.text:vTaskSuspendAll)
-                  0003bb5c    00000004     rts430x_lc_ld_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  0003bb60    00000002                            : startup.c.obj (.text:_system_post_cinit)
-                  0003bb62    00000002     main.obj (.text:vApplicationTickHook)
+.text      0    0002f44c    0000a9c4     
+                  0002f44c    0000114c     rts430x_lc_ld_eabi.lib : e_pow.c.obj (.text:pow)
+                  00030598    0000072a                            : addd.c.obj (.text:__mspabi_addd)
+                  00030cc2    00000528                            : e_exp.c.obj (.text:exp)
+                  000311ea    00000468                            : frcdivd.c.obj (.text:__TI_frcdivd)
+                  00031652    000003ec     layers.obj (.text:filters_sum)
+                  00031a3e    0000034e     rts430x_lc_ld_eabi.lib : div64u.c.obj (.text:__mspabi_divull)
+                  00031d8c    000002de                            : _printfi.c.obj (.text:__TI_printfi:_setfield___TI_printfi)
+                  0003206a    000002dc                            : e_sqrt.c.obj (.text:sqrt)
+                  00032346    000002d4     task2.obj (.text:Task2)
+                  0003261a    000002c0     task1.obj (.text:Task1)
+                  000328da    000002ae     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:__TI_printfi)
+                  00032b88    00000296     scheduler.obj (.text:SchedulerTask)
+                  00032e1e    00000292     rts430x_lc_ld_eabi.lib : mpyd.c.obj (.text:__mspabi_mpyd)
+                  000330b0    00000268                            : _printfi.c.obj (.text:_pproc_fgea)
+                  00033318    00000240     conv.obj (.text:conv)
+                  00033558    00000224     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:acvt)
+                  0003377c    0000021c                            : divd.c.obj (.text:__mspabi_divd)
+                  00033998    00000214     layers.obj (.text:conv2d)
+                  00033bac    00000206     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_getarg_diouxp___TI_printfi)
+                  00033db2    000001e6                            : _printfi.c.obj (.text:ecvt)
+                  00033f98    000001d8     tasks.obj (.text:xTaskIncrementTick)
+                  00034170    000001ce     msp_matrix_mpy_q15.obj (.text:msp_matrix_mpy_q15)
+                  0003433e    000001c8     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:fcvt)
+                  00034506    000001c4                            : s_floor.c.obj (.text:floor)
+                  000346ca    000001b6     avg_pool.obj (.text:global_avg_pool)
+                  00034880    000001ae     matrix_ops.obj (.text:filter_im2col)
+                  00034a2e    000001aa     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_e)
+                  00034bd8    00000198     queue.obj (.text:xQueueGenericSend)
+                  00034d70    0000018e     event_groups.obj (.text:xEventGroupWaitBits)
+                  00034efe    0000018c     dense.obj (.text:se1_fc2)
+                  0003508a    0000018c     tasks.obj (.text:xTaskResumeAll)
+                  00035216    00000182     queue.obj (.text:xQueueReceive)
+                  00035398    00000170     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_a)
+                  00035508    00000166     layers.obj (.text:maxpooling_with_importance)
+                  0003566e    00000164     rts430x_lc_ld_eabi.lib : frcmpyd.c.obj (.text:__TI_frcmpyd)
+                  000357d2    00000164     dense.obj (.text:sigmoid)
+                  00035936    0000015e     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_ltostr___TI_printfi)
+                  00035a94    0000015a                            : s_scalbn.c.obj (.text:scalbn)
+                  00035bee    00000158     dense.obj (.text:dense_koo)
+                  00035d46    0000014e     dense.obj (.text:se1_fc1)
+                  00035e94    0000014c     heap_4.obj (.text:pvPortMalloc)
+                  00035fe0    0000014c     tasks.obj (.text:xTaskRemoveFromEventList)
+                  0003612c    00000148     myuart.obj (.text:_DBGUART)
+                  00036274    00000148     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_pproc_diouxp___TI_printfi)
+                  000363bc    00000140     cs.obj (.text:CS_setDCOFreq)
+                  000364fc    00000134     timers.obj (.text:prvProcessReceivedCommands)
+                  00036630    00000132     rts430x_lc_ld_eabi.lib : fs_add.asm.obj (.text)
+                  00036762    00000132     tasks.obj (.text:vTaskSwitchContext)
+                  00036894    0000011c     tasks.obj (.text:vTaskRemoveFromUnorderedEventList)
+                  000369b0    00000106     rts430x_lc_ld_eabi.lib : s_round.c.obj (.text:round)
+                  00036ab6    00000100     event_groups.obj (.text:xEventGroupSetBits)
+                  00036bb6    000000fc     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_pconv_g)
+                  00036cb2    000000fc     tasks.obj (.text:prvInitialiseNewTask)
+                  00036dae    000000f6     layers.obj (.text:padding_same)
+                  00036ea4    000000ea     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:__TI_printfi:_pproc_fwp___TI_printfi)
+                  00036f8e    000000e2     tasks.obj (.text:prvAddNewTaskToReadyList)
+                  00037070    000000de     queue.obj (.text:xQueueGenericReset)
+                  0003714e    000000dc     max_pooling.obj (.text:max_pooling_layer)
+                  0003722a    000000d8     rts430x_lc_ld_eabi.lib : cmpd.c.obj (.text:__mspabi_cmpd)
+                  00037302    000000d6                            : _printfi.c.obj (.text:__TI_printfi:_pproc_wstr___TI_printfi)
+                  000373d8    000000d0     tasks.obj (.text:xTaskPriorityDisinherit)
+                  000374a8    000000cc     main.obj (.text:boardSetup)
+                  00037574    000000c4     tasks.obj (.text:prvAddCurrentTaskToDelayedList)
+                  00037638    000000b8     matrix_ops.obj (.text:matrix32_add)
+                  000376f0    000000b8     rts430x_lc_ld_eabi.lib : fs_mpy.asm.obj (.text)
+                  000377a8    000000b4                            : _printfi.c.obj (.text:__TI_printfi:_pproc_str___TI_printfi)
+                  0003785c    000000b4                            : _printfi.c.obj (.text:_mcpy)
+                  00037910    000000b4     myuart.obj (.text:setFrequency)
+                  000379c4    000000b2     rts430x_lc_ld_eabi.lib : cvtdf.c.obj (.text:__mspabi_cvtdf)
+                  00037a76    000000ac     heap_4.obj (.text:prvHeapInit)
+                  00037b22    000000aa     layers.obj (.text:maxpooling_filters)
+                  00037bcc    000000a6     rts430x_lc_ld_eabi.lib : s_frexp.c.obj (.text:frexp)
+                  00037c72    000000a6     portext.obj (.text)
+                  00037d18    000000a4     tasks.obj (.text:xTaskCheckForTimeOut)
+                  00037dbc    000000a0     queue.obj (.text:prvUnlockQueue)
+                  00037e5c    0000009e     rts430x_lc_ld_eabi.lib : fltlid.c.obj (.text:__mspabi_fltlid)
+                  00037efa    0000009e     queue.obj (.text:prvCopyDataToQueue)
+                  00037f98    0000009a     eusci_a_uart.obj (.text:EUSCI_A_UART_init)
+                  00038032    00000098     main.obj (.text:task_start)
+                  000380ca    00000096     rts430x_lc_ld_eabi.lib : _ltoa.c.obj (.text:__TI_ltoa)
+                  00038160    00000096     tasks.obj (.text:xTaskCreate)
+                  000381f6    00000090     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_ecpy)
+                  00038286    00000086     tasks.obj (.text:vTaskPlaceOnUnorderedEventList)
+                  0003830c    00000082     tasks.obj (.text:vTaskStartScheduler)
+                  0003838e    0000007a     myuart.obj (.text:convertFloat)
+                  00038408    0000007a     timers.obj (.text:prvInsertTimerInActiveList)
+                  00038482    0000007a     timers.obj (.text:prvProcessTimerOrBlockTask)
+                  000384fc    00000078     rts430x_lc_ld_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  00038574    00000078                            : _printfi.c.obj (.text:_pconv_f)
+                  000385ec    00000078                            : snprintf.c.obj (.text:snprintf)
+                  00038664    00000076                            : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  000386da    00000072     gpio.obj (.text:GPIO_setAsPeripheralModuleFunctionInputPin)
+                  0003874c    00000072     gpio.obj (.text:GPIO_setAsPeripheralModuleFunctionOutputPin)
+                  000387be    00000072     heap_4.obj (.text:prvInsertBlockIntoFreeList)
+                  00038830    0000006e     main.obj (.text:main)
+                  0003889e    0000006e     queue.obj (.text:xQueueGenericCreate)
+                  0003890c    0000006c     rts430x_lc_ld_eabi.lib : snprintf.c.obj (.text:_outs)
+                  00038978    0000006c     tasks.obj (.text:vTaskPlaceOnEventListRestricted)
+                  000389e4    0000006a     cs.obj (.text:CS_initClockSignal)
+                  00038a4e    0000006a     myuart.obj (.text:uartinit)
+                  00038ab8    0000006a     heap_4.obj (.text:vPortFree)
+                  00038b22    00000068     rts430x_lc_ld_eabi.lib : fs_toi.asm.obj (.text)
+                  00038b8a    00000066                            : fixdli.c.obj (.text:__mspabi_fixdli)
+                  00038bf0    00000062                            : atoi.c.obj (.text:atoi)
+                  00038c52    00000062     tasks.obj (.text:prvInitialiseTaskLists)
+                  00038cb4    00000060     matrix_ops.obj (.text:msp_checkStatus)
+                  00038d14    0000005e     event_groups.obj (.text:xEventGroupClearBits)
+                  00038d72    0000005c     rts430x_lc_ld_eabi.lib : mult64_f5hw.asm.obj (.text:__mpyll)
+                  00038dce    0000005a     timers.obj (.text:prvCheckForValidListAndQueue)
+                  00038e28    00000058     rts430x_lc_ld_eabi.lib : div32u.asm.obj (.text)
+                  00038e80    00000054     list.obj (.text:vListInsert)
+                  00038ed4    00000052     rtc.obj (.text:I2C_Master_WriteReg)
+                  00038f26    00000052     timers.obj (.text:prvReloadTimer)
+                  00038f78    00000050     tasks.obj (.text:prvCheckTasksWaitingTermination)
+                  00038fc8    0000004e     rts430x_lc_ld_eabi.lib : _printfi.c.obj (.text:_fcpy)
+                  00039016    0000004e     msp_lea_init.obj (.text:msp_lea_init)
+                  00039064    0000004e     queue.obj (.text:vQueueWaitForMessageRestricted)
+                  000390b2    0000004c     myuart.obj (.text:convertl)
+                  000390fe    0000004c     timers.obj (.text:prvProcessExpiredTimer)
+                  0003914a    0000004c     timers.obj (.text:xTimerCreateTimerTask)
+                  00039196    0000004a     block.obj (.text:SE_Block)
+                  000391e0    00000044     rtc.obj (.text:AB1805_get_datetime)
+                  00039224    00000042     eusci_a_uart.obj (.text:EUSCI_A_UART_transmitData)
+                  00039266    00000040     rtc.obj (.text:AB1805_set_datetime)
+                  000392a6    00000040     rtc.obj (.text:I2C_Master_ReadReg)
+                  000392e6    00000040     rts430x_lc_ld_eabi.lib : asr64.c.obj (.text:__mspabi_srall)
+                  00039326    00000040                            : div32s.asm.obj (.text)
+                  00039366    0000003e                            : asr32.asm.obj (.text:l_asr_const)
+                  000393a4    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
+                  000393e2    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
+                  00039420    0000003c                            : memcpy.c.obj (.text:memcpy)
+                  0003945c    0000003a     rtc.obj (.text:AB1805_init)
+                  00039496    0000003a     rts430x_lc_ld_eabi.lib : lsl64.c.obj (.text:__mspabi_sllll)
+                  000394d0    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
+                  0003950a    0000003a     list.obj (.text:uxListRemove)
+                  00039544    00000038     timers.obj (.text:prvSampleTimeNow)
+                  0003957c    00000036     rts430x_lc_ld_eabi.lib : fs_itof.asm.obj (.text)
+                  000395b2    00000034                            : memccpy.c.obj (.text:memccpy)
+                  000395e6    00000034     queue.obj (.text:prvCopyDataFromQueue)
+                  0003961a    00000032     rts430x_lc_ld_eabi.lib : subd.c.obj (.text:__mspabi_subd)
+                  0003964c    00000032     myuart.obj (.text:convert)
+                  0003967e    00000032     matrix_ops.obj (.text:dma_load)
+                  000396b0    00000030     event_groups.obj (.text:prvTestWaitCondition)
+                  000396e0    00000030     tasks.obj (.text:vTaskPlaceOnEventList)
+                  00039710    0000002e     rts430x_lc_ld_eabi.lib : negd.c.obj (.text:__mspabi_negd)
+                  0003973e    0000002e                            : snprintf.c.obj (.text:_outc)
+                  0003976c    0000002e                            : s_copysign.c.obj (.text:copysign)
+                  0003979a    0000002e     timers.obj (.text:prvGetNextExpireTime)
+                  000397c8    0000002e     queue.obj (.text:prvIsQueueFull)
+                  000397f6    0000002c     rts430x_lc_ld_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
+                  00039822    0000002c     queue.obj (.text:prvIsQueueEmpty)
+                  0003984e    0000002c     timers.obj (.text:prvSwitchTimerLists)
+                  0003987a    0000002c     rts430x_lc_ld_eabi.lib : div16s.asm.obj (.text)
+                  000398a6    0000002c     list.obj (.text:vListInitialise)
+                  000398d2    0000002a     queue.obj (.text:prvInitialiseNewQueue)
+                  000398fc    0000002a     tasks.obj (.text:uxTaskResetEventItemValue)
+                  00039926    00000028     rts430x_lc_ld_eabi.lib : fixdi.c.obj (.text:__mspabi_fixdi)
+                  0003994e    00000028     tasks.obj (.text:prvResetNextTaskUnblockTime)
+                  00039976    00000028     rts430x_lc_ld_eabi.lib : wcslen.c.obj (.text:wcslen)
+                  0003999e    00000028     tasks.obj (.text:xTaskGetTickCount)
+                  000399c6    00000026     main.obj (.text:vApplicationSetupTimerInterrupt)
+                  000399ec    00000026     event_groups.obj (.text:xEventGroupCreate)
+                  00039a12    00000024     scheduler.obj (.text:addTaskToArray)
+                  00039a36    00000024     rts430x_lc_ld_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init)
+                  00039a5a    00000024     port.obj (.text:pxPortInitialiseStack)
+                  00039a7e    00000024     rts430x_lc_ld_eabi.lib : mult32_f5hw.asm.obj (.text)
+                  00039aa2    00000022     eusci_a_uart.obj (.text:resetUART)
+                  00039ac4    00000020     rts430x_lc_ld_eabi.lib : memset.c.obj (.text:memset)
+                  00039ae4    0000001c     rtc.obj (.text:CopyArray)
+                  00039b00    0000001c     rts430x_lc_ld_eabi.lib : strchr.c.obj (.text:strchr)
+                  00039b1c    0000001a     rtc.obj (.text:AB1805_write_rtc_register)
+                  00039b36    00000018     rtc.obj (.text:AB1805_set_day)
+                  00039b4e    00000018     rtc.obj (.text:AB1805_set_hour)
+                  00039b66    00000018     rtc.obj (.text:AB1805_set_month)
+                  00039b7e    00000018     rts430x_lc_ld_eabi.lib : mult16_f5hw.asm.obj (.text)
+                  00039b96    00000018     tasks.obj (.text:xTaskGetSchedulerState)
+                  00039bae    00000016     rtc.obj (.text:AB1805_set_date)
+                  00039bc4    00000016     rtc.obj (.text:AB1805_set_minute)
+                  00039bda    00000016     rtc.obj (.text:AB1805_set_second)
+                  00039bf0    00000016     rtc.obj (.text:bcd_to_decimal)
+                  00039c06    00000016     rts430x_lc_ld_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00039c1c    00000016     tasks.obj (.text:prvDeleteTCB)
+                  00039c32    00000016     tasks.obj (.text:prvIdleTask)
+                  00039c48    00000016     timers.obj (.text:prvTimerTask)
+                  00039c5e    00000016     rts430x_lc_ld_eabi.lib : div16u.asm.obj (.text)
+                  00039c74    00000014     tasks.obj (.text:vTaskInternalSetTimeOutState)
+                  00039c88    00000012     rtc.obj (.text:AB1805_get_hour)
+                  00039c9a    00000012     rtc.obj (.text:AB1805_get_month)
+                  00039cac    00000012     rtc.obj (.text:AB1805_read_rtc_register)
+                  00039cbe    00000012     rts430x_lc_ld_eabi.lib : strlen.c.obj (.text:strlen)
+                  00039cd0    00000012                            : toupper.c.obj (.text:toupper)
+                  00039ce2    00000010     rtc.obj (.text:AB1805_get_date)
+                  00039cf2    00000010     rtc.obj (.text:AB1805_get_minute)
+                  00039d02    00000010     rtc.obj (.text:AB1805_get_second)
+                  00039d12    00000010     rtc.obj (.text:AB1805_get_year)
+                  00039d22    00000010     rts430x_lc_ld_eabi.lib : asr32.asm.obj (.text:l_asr)
+                  00039d32    00000010                            : lsl32.asm.obj (.text:l_lsl)
+                  00039d42    00000010                            : lsr32.asm.obj (.text:l_lsr)
+                  00039d52    00000010     main.obj (.text:vConfigureTimerForRunTimeStats)
+                  00039d62    0000000e     rtc.obj (.text:AB1805_get_day)
+                  00039d70    0000000e     rtc.obj (.text:AB1805_get_hundredth)
+                  00039d7e    0000000c     rtc.obj (.text:AB1805_set_year)
+                  00039d8a    0000000c     eusci_a_uart.obj (.text:EUSCI_A_UART_clearInterrupt)
+                  00039d96    0000000c     rts430x_lc_ld_eabi.lib : fltid.c.obj (.text:__mspabi_fltid)
+                  00039da2    0000000c     main.obj (.text:vApplicationIdleHook)
+                  00039dae    0000000a     rtc.obj (.text:AB1805_get_rtc_data)
+                  00039db8    0000000a     rts430x_lc_ld_eabi.lib : abs.c.obj (.text:abs)
+                  00039dc2    0000000a                            : lsl16.asm.obj (.text)
+                  00039dcc    0000000a     main.obj (.text:vApplicationMallocFailedHook)
+                  00039dd6    0000000a     main.obj (.text:vApplicationStackOverflowHook)
+                  00039de0    00000008     fixed_point_ops.obj (.text:fp_relu)
+                  00039de8    00000008     list.obj (.text:vListInitialiseItem)
+                  00039df0    00000006     eusci_a_uart.obj (.text:EUSCI_A_UART_enable)
+                  00039df6    00000006     rts430x_lc_ld_eabi.lib : exit.c.obj (.text:abort)
+                  00039dfc    00000006     tasks.obj (.text:vTaskMissedYield)
+                  00039e02    00000006     tasks.obj (.text:vTaskSuspendAll)
+                  00039e08    00000004     rts430x_lc_ld_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00039e0c    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  00039e0e    00000002     main.obj (.text:vApplicationTickHook)
 
 MODULE SUMMARY
 
        Module                       code    ro data   rw data
        ------                       ----    -------   -------
     .\
-       main.obj                     686     20        30764  
-       task1.obj                    668     66        23332  
-       task2.obj                    668     66        23328  
-       rtc.obj                      626     2         47     
-       scheduler.obj                242     0         16     
+       task2.obj                    724     106       23328  
+       task1.obj                    704     62        23332  
+       main.obj                     574     30        20551  
+       rtc.obj                      948     2         47     
+       scheduler.obj                698     18        16     
     +--+----------------------------+-------+---------+---------+
-       Total:                       2890    154       77487  
+       Total:                       3648    218       67274  
                                                              
     .\DSPLib\source\lea\
        msp_lea_init.obj             78      0         0      
@@ -598,12 +633,13 @@ MODULE SUMMARY
        Total:                       462     0         0      
                                                              
     .\Source\
-       tasks.obj                    3662    52        232    
-       queue.obj                    1628    0         0      
+       tasks.obj                    3806    76        232    
+       queue.obj                    1706    0         0      
+       timers.obj                   1044    8         56     
        event_groups.obj             834     0         0      
        list.obj                     194     0         0      
     +--+----------------------------+-------+---------+---------+
-       Total:                       6318    52        232    
+       Total:                       7584    84        288    
                                                              
     .\Source\portable\CCS\MSP430X\
        portext.obj                  166     0         0      
@@ -618,21 +654,20 @@ MODULE SUMMARY
                                                              
     .\driverlib\MSP430FR5xx_6xx\
        cs.obj                       426     0         0      
+       eusci_a_uart.obj             272     0         0      
        gpio.obj                     228     28        0      
-       eusci_a_uart.obj             206     0         0      
-       pmm.obj                      6       0         0      
     +--+----------------------------+-------+---------+---------+
-       Total:                       866     28        0      
+       Total:                       926     28        0      
                                                              
     .\layer\
-       conv.obj                     552     0         20000  
+       conv.obj                     576     0         20000  
        dense.obj                    1430    0         11052  
-       layers.obj                   1846    0         6144   
+       layers.obj                   2310    0         6180   
        avg_pool.obj                 438     0         28     
        max_pooling.obj              220     0         0      
        block.obj                    74      0         0      
     +--+----------------------------+-------+---------+---------+
-       Total:                       4560    0         37224  
+       Total:                       5048    0         37260  
                                                              
     .\math\
        matrix_ops.obj               760     4         3780   
@@ -646,9 +681,9 @@ MODULE SUMMARY
        Total:                       0       0         23798  
                                                              
     .\uart_for_msp\
-       myuart.obj                   868     8         310    
+       myuart.obj                   862     8         310    
     +--+----------------------------+-------+---------+---------+
-       Total:                       868     8         310    
+       Total:                       862     8         310    
                                                              
     C:\ti\ccs1260\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_ld_eabi.lib
        _printfi.c.obj               6918    38        0      
@@ -738,6 +773,7 @@ MODULE SUMMARY
        int42.asm.obj                0       2         0      
        int43.asm.obj                0       2         0      
        int44.asm.obj                0       2         0      
+       int46.asm.obj                0       2         0      
        int47.asm.obj                0       2         0      
        int48.asm.obj                0       2         0      
        int49.asm.obj                0       2         0      
@@ -748,25 +784,25 @@ MODULE SUMMARY
        int54.asm.obj                0       2         0      
        startup.c.obj                2       0         0      
     +--+----------------------------+-------+---------+---------+
-       Total:                       23444   457       2      
+       Total:                       23444   459       2      
                                                              
        Stack:                       0       0         160    
-       Linker Generated:            0       276       0      
+       Linker Generated:            0       258       0      
     +--+----------------------------+-------+---------+---------+
-       Grand Total:                 41224   983       143027 
+       Grand Total:                 43790   1063      132906 
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00004502 records: 3, size/record: 8, table size: 24
-	.data: load addr=00004406, load size=000000e4 bytes, run addr=00001c00, run size=000001ec bytes, compression=lzss
-	.bss: load addr=000044f6, load size=00000006 bytes, run addr=00001dec, run size=0000017c bytes, compression=zero_init
-	.leaRAM: load addr=000044fc, load size=00000006 bytes, run addr=00002c00, run size=00000ec4 bytes, compression=zero_init
+__TI_cinit_table @ 0000450e records: 3, size/record: 8, table size: 24
+	.data: load addr=00004424, load size=000000d2 bytes, run addr=00001c00, run size=000001d6 bytes, compression=lzss
+	.bss: load addr=00004502, load size=00000006 bytes, run addr=00001dd6, run size=000001a8 bytes, compression=zero_init
+	.leaRAM: load addr=00004508, load size=00000006 bytes, run addr=00002c00, run size=00000ec4 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 000044ea records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 000044f6 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -776,16 +812,27 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                                       
 -------   ----                                       
-0003b552  AB1805_init                                
-0003b9c4  AB1805_set_date                            
-0003b120  AB1805_set_datetime                        
-0003b94c  AB1805_set_day                             
-0003b964  AB1805_set_hour                            
-0003b9da  AB1805_set_minute                          
-0003b97c  AB1805_set_month                           
-0003b9f0  AB1805_set_second                          
-0003bad6  AB1805_set_year                            
-0003b932  AB1805_write_rtc_register                  
+00039ce2  AB1805_get_date                            
+000391e0  AB1805_get_datetime                        
+00039d62  AB1805_get_day                             
+00039c88  AB1805_get_hour                            
+00039d70  AB1805_get_hundredth                       
+00039cf2  AB1805_get_minute                          
+00039c9a  AB1805_get_month                           
+00039dae  AB1805_get_rtc_data                        
+00039d02  AB1805_get_second                          
+00039d12  AB1805_get_year                            
+0003945c  AB1805_init                                
+00039cac  AB1805_read_rtc_register                   
+00039bae  AB1805_set_date                            
+00039266  AB1805_set_datetime                        
+00039b36  AB1805_set_day                             
+00039b4e  AB1805_set_hour                            
+00039bc4  AB1805_set_minute                          
+00039b66  AB1805_set_month                           
+00039bda  AB1805_set_second                          
+00039d7e  AB1805_set_year                            
+00039b1c  AB1805_write_rtc_register                  
 00000800  ADC12CTL0                                  
 00000801  ADC12CTL0_H                                
 00000800  ADC12CTL0_L                                
@@ -1017,7 +1064,6 @@ address   name
 00000872  ADC12MEM9                                  
 00000873  ADC12MEM9_H                                
 00000872  ADC12MEM9_L                                
-000040e6  ADC12_ISR                                  
 000009c0  AESACTL0                                   
 000009c1  AESACTL0_H                                 
 000009c0  AESACTL0_L                                 
@@ -1048,7 +1094,7 @@ address   name
 000004bc  BIN2BCD                                    
 000004bd  BIN2BCD_H                                  
 000004bc  BIN2BCD_L                                  
-0003bb4a  C$$EXIT                                    
+00039df6  C$$EXIT                                    
 0000043e  CAPTIO0CTL                                 
 0000043f  CAPTIO0CTL_H                               
 0000043e  CAPTIO0CTL_L                               
@@ -1142,9 +1188,9 @@ address   name
 0000016c  CSCTL6                                     
 0000016d  CSCTL6_H                                   
 0000016c  CSCTL6_L                                   
-0003aac2  CS_initClockSignal                         
-00038680  CS_setDCOFreq                              
-0003b8fa  CopyArray                                  
+000389e4  CS_initClockSignal                         
+000363bc  CS_setDCOFreq                              
+00039ae4  CopyArray                                  
 00000510  DMA0CTL                                    
 00000511  DMA0CTL_H                                  
 00000510  DMA0CTL_L                                  
@@ -1232,24 +1278,25 @@ address   name
 0000050e  DMAIV                                      
 0000050f  DMAIV_H                                    
 0000050e  DMAIV_L                                    
-0003bae2  EUSCI_A_UART_clearInterrupt                
-0003bb3e  EUSCI_A_UART_enable                        
-0003a256  EUSCI_A_UART_init                          
-0003b8b8  EUSCI_A_UART_transmitData                  
+00039d8a  EUSCI_A_UART_clearInterrupt                
+00039df0  EUSCI_A_UART_enable                        
+00037f98  EUSCI_A_UART_init                          
+00039224  EUSCI_A_UART_transmitData                  
 00000140  FRCTL0                                     
 00000141  FRCTL0_H                                   
 00000140  FRCTL0_L                                   
-00001d82  FastToggle_Period                          
-00001d7a  FreqLevel                                  
+00001da2  FreqLevel                                  
 00000144  GCCTL0                                     
 00000145  GCCTL0_H                                   
 00000144  GCCTL0_L                                   
 00000146  GCCTL1                                     
 00000147  GCCTL1_H                                   
 00000146  GCCTL1_L                                   
-0003a822  GPIO_setAsPeripheralModuleFunctionInputPin 
-0003a894  GPIO_setAsPeripheralModuleFunctionOutputPin
-0003af4c  I2C_Master_WriteReg                        
+000386da  GPIO_setAsPeripheralModuleFunctionInputPin 
+0003874c  GPIO_setAsPeripheralModuleFunctionOutputPin
+000392a6  I2C_Master_ReadReg                         
+00038ed4  I2C_Master_WriteReg                        
+0000439c  INITIAL_VALUES                             
 00000a80  LEACAP                                     
 00000a82  LEACAPH                                    
 00000a80  LEACAPL                                    
@@ -1331,9 +1378,10 @@ address   name
 000004c6  MACS_L                                     
 000004c5  MAC_H                                      
 000004c4  MAC_L                                      
-00017800  MODEL_ARRAY_TEMP                           
-00031810  MODEL_BLOCK_TEMP_1                         
-000318d8  MODEL_BLOCK_TEMP_2                         
+0002f2e0  ML_num                                     
+00015000  MODEL_ARRAY_TEMP                           
+0002f010  MODEL_BLOCK_TEMP_1                         
+0002f0d8  MODEL_BLOCK_TEMP_2                         
 000005a0  MPUCTL0                                    
 000005a1  MPUCTL0_H                                  
 000005a0  MPUCTL0_L                                  
@@ -1380,7 +1428,7 @@ address   name
 000004c1  MPY_H                                      
 000004c0  MPY_L                                      
 00002c00  MULTIPLY_BUFFER                            
-00001dd8  MasterMode                                 
+00001dc2  MasterMode                                 
 000004c8  OP2                                        
 000004e2  OP2H                                       
 000004e3  OP2H_H                                     
@@ -1687,7 +1735,6 @@ address   name
 0000012a  PMMIFG                                     
 0000012b  PMMIFG_H                                   
 0000012a  PMMIFG_L                                   
-0003bb44  PMM_unlockLPM5                             
 00000158  RCCTL0                                     
 00000159  RCCTL0_H                                   
 00000158  RCCTL0_L                                   
@@ -1766,21 +1813,21 @@ address   name
 000004b6  RTCYEAR                                    
 000004b7  RTCYEAR_H                                  
 000004b6  RTCYEAR_L                                  
-00001ddb  RXByteCtr                                  
+00001dc5  RXByteCtr                                  
 00001cbc  ReceiveBuffer                              
-00001ddc  ReceiveIndex                               
-00001dc0  SE_1                                       
-00001d84  SE_1_1                                     
-00001d8e  SE_1_2                                     
-00001dc8  SE_2                                       
-00001d98  SE_2_1                                     
-00001da2  SE_2_2                                     
-00001dd0  SE_3                                       
-00001dac  SE_3_1                                     
-00001db6  SE_3_2                                     
-0003b0d6  SE_Block                                   
-00031b48  SE_FC_1                                    
-00031b5c  SE_FC_2                                    
+00001dc6  ReceiveIndex                               
+00001daa  SE_1                                       
+00001d64  SE_1_1                                     
+00001d6e  SE_1_2                                     
+00001db2  SE_2                                       
+00001d78  SE_2_1                                     
+00001d82  SE_2_2                                     
+00001dba  SE_3                                       
+00001d8c  SE_3_1                                     
+00001d96  SE_3_2                                     
+00039196  SE_Block                                   
+0002f36c  SE_FC_1                                    
+0002f380  SE_FC_2                                    
 00000100  SFRIE1                                     
 00000101  SFRIE1_H                                   
 00000100  SFRIE1_L                                   
@@ -1820,11 +1867,10 @@ address   name
 0000019a  SYSUNIV                                    
 0000019b  SYSUNIV_H                                  
 0000019a  SYSUNIV_L                                  
-00039764  SchedulerTask                              
+00032b88  SchedulerTask                              
 00001cd0  Sig_1                                      
 00001ce4  Sig_2                                      
 00001cf8  Sig_3                                      
-00001d80  SlowToggle_Period                          
 00000352  TA0CCR0                                    
 00000353  TA0CCR0_H                                  
 00000352  TA0CCR0_L                                  
@@ -2017,15 +2063,15 @@ address   name
 000003d0  TB0R                                       
 000003d1  TB0R_H                                     
 000003d0  TB0R_L                                     
-00001ddd  TXByteCtr                                  
-00034c88  Task1                                      
-0001c620  Task1_Input                                
-00034f24  Task2                                      
-00021440  Task2_Input                                
+00001dc7  TXByteCtr                                  
+0003261a  Task1                                      
+00019e20  Task1_Input                                
+00032346  Task2                                      
+0001ec40  Task2_Input                                
 00001d0c  TransmitBuffer                             
-00001dde  TransmitIndex                              
-00001dda  TransmitRegAddr                            
-00001d78  UART_FG                                    
+00001dc8  TransmitIndex                              
+00001dc4  TransmitRegAddr                            
+00001da0  UART_FG                                    
 000005d0  UCA0ABCTL                                  
 000005d1  UCA0ABCTL_H                                
 000005d0  UCA0ABCTL_L                                
@@ -2379,20 +2425,20 @@ address   name
 0000015c  WDTCTL                                     
 0000015d  WDTCTL_H                                   
 0000015c  WDTCTL_L                                   
-000383f0  _DBGUART                                   
+0003612c  _DBGUART                                   
 0000ff80  __STACK_END                                
 000000a0  __STACK_SIZE                               
-00004502  __TI_CINIT_Base                            
-0000451a  __TI_CINIT_Limit                           
-0000451a  __TI_CINIT_Warm                            
-000044ea  __TI_Handler_Table_Base                    
-000044f6  __TI_Handler_Table_Limit                   
-00004186  __TI_ISR_TRAP                              
-0003a644  __TI_auto_init_nobinit_nopinit_hold_wdt    
-0003a7ac  __TI_decompress_lzss                       
-0003ba06  __TI_decompress_none                       
-00033988  __TI_frcdivd                               
-000377e4  __TI_frcmpyd                               
+0000450e  __TI_CINIT_Base                            
+00004526  __TI_CINIT_Limit                           
+00004526  __TI_CINIT_Warm                            
+000044f6  __TI_Handler_Table_Base                    
+00004502  __TI_Handler_Table_Limit                   
+00004142  __TI_ISR_TRAP                              
+000384fc  __TI_auto_init_nobinit_nopinit_hold_wdt    
+00038664  __TI_decompress_lzss                       
+00039c06  __TI_decompress_none                       
+000311ea  __TI_frcdivd                               
+0003566e  __TI_frcmpyd                               
 0000ffb4  __TI_int18                                 
 0000ffb6  __TI_int19                                 
 0000ffb8  __TI_int20                                 
@@ -2430,234 +2476,245 @@ address   name
 0000fff8  __TI_int52                                 
 0000fffa  __TI_int53                                 
 0000fffc  __TI_int54                                 
-0003a388  __TI_ltoa                                  
+000380ca  __TI_ltoa                                  
 ffffffff  __TI_pprof_out_hndl                        
-000349da  __TI_printfi                               
+000328da  __TI_printfi                               
 ffffffff  __TI_prof_data_size                        
 ffffffff  __TI_prof_data_start                       
-0003b84c  __TI_zero_init                             
+00039a36  __TI_zero_init                             
 ffffffff  __c_args__                                 
-00032d36  __mspabi_addd                              
-000387c6  __mspabi_addf                              
-000394e6  __mspabi_cmpd                              
-00039c82  __mspabi_cvtdf                             
-00035b06  __mspabi_divd                              
-0003b690  __mspabi_divi                              
-0003b1a0  __mspabi_divli                             
-0003ba48  __mspabi_divu                              
-0003aea0  __mspabi_divul                             
-00033df0  __mspabi_divull                            
-0003b73c  __mspabi_fixdi                             
-0003abfe  __mspabi_fixdli                            
-0003ab96  __mspabi_fixfi                             
-0003baee  __mspabi_fltid                             
-0003b3be  __mspabi_fltif                             
-0003a11a  __mspabi_fltlid                            
-000351c0  __mspabi_mpyd                              
-000399ae  __mspabi_mpyf                              
-0003b994  __mspabi_mpyi_f5hw                         
-0003b894  __mspabi_mpyl_f5hw                         
-0003ae44  __mspabi_mpyll_f5hw                        
-0003b638  __mspabi_mpyull_f5hw                       
-0003b580  __mspabi_negd                              
-0003b690  __mspabi_remi                              
-0003b1a0  __mspabi_remli                             
-0003ba48  __mspabi_remu                              
-0003aea0  __mspabi_remul                             
-0003bb10  __mspabi_slli                              
-0003baa6  __mspabi_slll                              
-0003b256  __mspabi_slll_1                            
-0003b232  __mspabi_slll_10                           
-0003b22e  __mspabi_slll_11                           
-0003b22a  __mspabi_slll_12                           
-0003b226  __mspabi_slll_13                           
-0003b222  __mspabi_slll_14                           
-0003b21e  __mspabi_slll_15                           
-0003b252  __mspabi_slll_2                            
-0003b24e  __mspabi_slll_3                            
-0003b24a  __mspabi_slll_4                            
-0003b246  __mspabi_slll_5                            
-0003b242  __mspabi_slll_6                            
-0003b23e  __mspabi_slll_7                            
-0003b23a  __mspabi_slll_8                            
-0003b236  __mspabi_slll_9                            
-0003b2d6  __mspabi_sllll                             
-0003ba96  __mspabi_sral                              
-0003b218  __mspabi_sral_1                            
-0003b1f4  __mspabi_sral_10                           
-0003b1f0  __mspabi_sral_11                           
-0003b1ec  __mspabi_sral_12                           
-0003b1e8  __mspabi_sral_13                           
-0003b1e4  __mspabi_sral_14                           
-0003b1e0  __mspabi_sral_15                           
-0003b214  __mspabi_sral_2                            
-0003b210  __mspabi_sral_3                            
-0003b20c  __mspabi_sral_4                            
-0003b208  __mspabi_sral_5                            
-0003b204  __mspabi_sral_6                            
-0003b200  __mspabi_sral_7                            
-0003b1fc  __mspabi_sral_8                            
-0003b1f8  __mspabi_sral_9                            
-0003b160  __mspabi_srall                             
-0003bab6  __mspabi_srll                              
-0003b294  __mspabi_srll_1                            
-0003b270  __mspabi_srll_10                           
-0003b26c  __mspabi_srll_11                           
-0003b268  __mspabi_srll_12                           
-0003b264  __mspabi_srll_13                           
-0003b260  __mspabi_srll_14                           
-0003b25c  __mspabi_srll_15                           
-0003b290  __mspabi_srll_2                            
-0003b28c  __mspabi_srll_3                            
-0003b288  __mspabi_srll_4                            
-0003b284  __mspabi_srll_5                            
-0003b280  __mspabi_srll_6                            
-0003b27c  __mspabi_srll_7                            
-0003b278  __mspabi_srll_8                            
-0003b274  __mspabi_srll_9                            
-0003b310  __mspabi_srlll                             
-0003b45c  __mspabi_subd                              
-000387c0  __mspabi_subf                              
-0000412a  _c_int00_noargs                            
-0000418e  _ctypes_                                   
+00030598  __mspabi_addd                              
+00036636  __mspabi_addf                              
+0003722a  __mspabi_cmpd                              
+000379c4  __mspabi_cvtdf                             
+0003377c  __mspabi_divd                              
+0003987a  __mspabi_divi                              
+00039326  __mspabi_divli                             
+00039c5e  __mspabi_divu                              
+00038e28  __mspabi_divul                             
+00031a3e  __mspabi_divull                            
+00039926  __mspabi_fixdi                             
+00038b8a  __mspabi_fixdli                            
+00038b22  __mspabi_fixfi                             
+00039d96  __mspabi_fltid                             
+0003957c  __mspabi_fltif                             
+00037e5c  __mspabi_fltlid                            
+00032e1e  __mspabi_mpyd                              
+000376f0  __mspabi_mpyf                              
+00039b7e  __mspabi_mpyi_f5hw                         
+00039a7e  __mspabi_mpyl_f5hw                         
+00038d72  __mspabi_mpyll_f5hw                        
+000397f6  __mspabi_mpyull_f5hw                       
+00039710  __mspabi_negd                              
+0003987a  __mspabi_remi                              
+00039326  __mspabi_remli                             
+00039c5e  __mspabi_remu                              
+00038e28  __mspabi_remul                             
+00039dc2  __mspabi_slli                              
+00039d32  __mspabi_slll                              
+000393dc  __mspabi_slll_1                            
+000393b8  __mspabi_slll_10                           
+000393b4  __mspabi_slll_11                           
+000393b0  __mspabi_slll_12                           
+000393ac  __mspabi_slll_13                           
+000393a8  __mspabi_slll_14                           
+000393a4  __mspabi_slll_15                           
+000393d8  __mspabi_slll_2                            
+000393d4  __mspabi_slll_3                            
+000393d0  __mspabi_slll_4                            
+000393cc  __mspabi_slll_5                            
+000393c8  __mspabi_slll_6                            
+000393c4  __mspabi_slll_7                            
+000393c0  __mspabi_slll_8                            
+000393bc  __mspabi_slll_9                            
+00039496  __mspabi_sllll                             
+00039d22  __mspabi_sral                              
+0003939e  __mspabi_sral_1                            
+0003937a  __mspabi_sral_10                           
+00039376  __mspabi_sral_11                           
+00039372  __mspabi_sral_12                           
+0003936e  __mspabi_sral_13                           
+0003936a  __mspabi_sral_14                           
+00039366  __mspabi_sral_15                           
+0003939a  __mspabi_sral_2                            
+00039396  __mspabi_sral_3                            
+00039392  __mspabi_sral_4                            
+0003938e  __mspabi_sral_5                            
+0003938a  __mspabi_sral_6                            
+00039386  __mspabi_sral_7                            
+00039382  __mspabi_sral_8                            
+0003937e  __mspabi_sral_9                            
+000392e6  __mspabi_srall                             
+00039d42  __mspabi_srll                              
+0003941a  __mspabi_srll_1                            
+000393f6  __mspabi_srll_10                           
+000393f2  __mspabi_srll_11                           
+000393ee  __mspabi_srll_12                           
+000393ea  __mspabi_srll_13                           
+000393e6  __mspabi_srll_14                           
+000393e2  __mspabi_srll_15                           
+00039416  __mspabi_srll_2                            
+00039412  __mspabi_srll_3                            
+0003940e  __mspabi_srll_4                            
+0003940a  __mspabi_srll_5                            
+00039406  __mspabi_srll_6                            
+00039402  __mspabi_srll_7                            
+000393fe  __mspabi_srll_8                            
+000393fa  __mspabi_srll_9                            
+000394d0  __mspabi_srlll                             
+0003961a  __mspabi_subd                              
+00036630  __mspabi_subf                              
+000040e6  _c_int00_noargs                            
+0000414a  _ctypes_                                   
 0000fffe  _reset_vector                              
 0000fee0  _stack                                     
-0003bb60  _system_post_cinit                         
-0003bb5c  _system_pre_init                           
-0003bb4a  abort                                      
-0003bb06  abs                                        
-0003b828  addTaskToArray                             
-0003ac64  atoi                                       
-00038a24  boardSetup                                 
-000356ba  conv                                       
-00031b00  conv1Params                                
-00031ae0  conv1_bias                                 
-00031460  conv1_weight                               
-00031bcc  conv1scale                                 
-00031b18  conv2Params                                
-00031a20  conv2_bias                                 
-0002d260  conv2_weight                               
-00037ebc  conv2d                                     
-00031bd6  conv2scale                                 
-00031b30  conv3Params                                
-000319a0  conv3_bias                                 
-00026260  conv3_weight                               
-00031be0  conv3scale                                 
-0003b48e  convert                                    
-0003a5ca  convertFloat                               
-0003b08a  convertl                                   
-0003b5dc  copysign                                   
-0003b5dc  copysignl                                  
-00037d64  dense_koo                                  
-0003b4c0  dma_load                                   
-00001dea  errno                                      
-00033460  exp                                        
-00033460  expl                                       
-000369f6  filter_im2col                              
-0003413e  filters_sum                                
-0003667c  floor                                      
-0003667c  floorl                                     
-0003bb2e  fp_relu                                    
+00039e0c  _system_post_cinit                         
+00039e08  _system_pre_init                           
+00039df6  abort                                      
+00039db8  abs                                        
+00039a12  addTaskToArray                             
+00038bf0  atoi                                       
+00039bf0  bcd_to_decimal                             
+000374a8  boardSetup                                 
+0002f443  check                                      
+00033318  conv                                       
+0002f324  conv1Params                                
+0002f304  conv1_bias                                 
+0002ec60  conv1_weight                               
+0002f424  conv1scale                                 
+0002f33c  conv2Params                                
+0002f220  conv2_bias                                 
+0002aa60  conv2_weight                               
+00033998  conv2d                                     
+0002f42e  conv2scale                                 
+0002f354  conv3Params                                
+0002f1a0  conv3_bias                                 
+00023a60  conv3_weight                               
+0002f438  conv3scale                                 
+0003964c  convert                                    
+0003838e  convertFloat                               
+000390b2  convertl                                   
+0003976c  copysign                                   
+0003976c  copysignl                                  
+00035bee  dense_koo                                  
+0003967e  dma_load                                   
+0002f448  elapsed_ticks                              
+0002f3f4  end_time                                   
+00001dd4  errno                                      
+00030cc2  exp                                        
+00030cc2  expl                                       
+0002f442  fail                                       
+00034880  filter_im2col                              
+00031652  filters_sum                                
+00034506  floor                                      
+00034506  floorl                                     
+00039de0  fp_relu                                    
 00004000  fram_ipe_end                               
 00004000  fram_ipe_start                             
 00004000  fram_rw_start                              
 00004000  fram_rx_start                              
-00039e8a  frexp                                      
-00039e8a  frexpl                                     
-00036840  global_avg_pool                            
-00037c0a  ldexp                                      
-00037c0a  ldexpl                                     
-0003b34a  main                                       
-000398f6  matrix32_add                               
-0003940a  max_pooling_layer                          
-00039de0  maxpooling_filters                         
-0003767e  maxpooling_with_importance                 
-0003b3f4  memccpy                                    
-0003b29a  memcpy                                     
-0003b8da  memset                                     
-00001f64  msp_lea_ifg                                
-0003b03c  msp_lea_init                               
-00004146  msp_lea_isr                                
-00001f66  msp_lea_locked                             
-000362e6  msp_matrix_mpy_q15                         
-0003906a  padding_same                               
-00031bea  pow                                        
-00031bea  powl                                       
-00038158  pvPortMalloc                               
+00037bcc  frexp                                      
+00037bcc  frexpl                                     
+000346ca  global_avg_pool                            
+00035a94  ldexp                                      
+00035a94  ldexpl                                     
+00038830  main                                       
+00037638  matrix32_add                               
+0003714e  max_pooling_layer                          
+00037b22  maxpooling_filters                         
+00035508  maxpooling_with_importance                 
+000395b2  memccpy                                    
+00039420  memcpy                                     
+00039ac4  memset                                     
+00001f7a  msp_lea_ifg                                
+00039016  msp_lea_init                               
+00004102  msp_lea_isr                                
+00001f7c  msp_lea_locked                             
+00034170  msp_matrix_mpy_q15                         
+00036dae  padding_same                               
+0002f44c  pow                                        
+0002f44c  powl                                       
+00035e94  pvPortMalloc                               
 00001c90  pxCurrentTCB                               
-0003b870  pxPortInitialiseStack                      
-00038c6c  round                                      
-00038c6c  roundl                                     
-00037c0a  scalbn                                     
-00037c0a  scalbnl                                    
-0003800a  se1_fc1                                    
-00037074  se1_fc2                                    
-00039bce  setFrequency                               
-00037948  sigmoid                                    
-0003a734  snprintf                                   
-000346fe  sqrt                                       
-000346fe  sqrtl                                      
-0003b916  strchr                                     
-0003ba72  strlen                                     
-00001d58  task1Params                                
-00001d68  task2Params                                
-00001f54  taskArray                                  
-0003a2f0  task_start                                 
-00001de0  totalSum                                   
-0003ba84  toupper                                    
-00001d7e  uart2setup                                 
-0003a978  uartinit                                   
-00001d7c  uartsetup                                  
+00039a5a  pxPortInitialiseStack                      
+00039aa2  resetUART                                  
+0002f444  restore_tick                               
+000369b0  round                                      
+000369b0  roundl                                     
+00035a94  scalbn                                     
+00035a94  scalbnl                                    
+00035d46  se1_fc1                                    
+00034efe  se1_fc2                                    
+00037910  setFrequency                               
+000357d2  sigmoid                                    
+000385ec  snprintf                                   
+0003206a  sqrt                                       
+0003206a  sqrtl                                      
+00001da8  start                                      
+00039b00  strchr                                     
+00039cbe  strlen                                     
+0002f3d0  task1Params                                
+0002f3e2  task2Params                                
+00001f6a  taskArray                                  
+00038032  task_start                                 
+00001dca  totalSum                                   
+00039cd0  toupper                                    
+00001da6  uart2setup                                 
+00038a4e  uartinit                                   
+00001da4  uartsetup                                  
 00010000  ucHeap                                     
-00001de4  ulRunTimeCounterOverflows                  
-00001de8  usCriticalNesting                          
-0003b384  uxListRemove                               
-0003b712  uxTaskResetEventItemValue                  
-00004404  uxTopUsedPriority                          
-00004162  v4RunTimeStatsTimerOverflow                
-0003bafa  vApplicationIdleHook                       
-0003bb1a  vApplicationMallocFailedHook               
-0003b7dc  vApplicationSetupTimerInterrupt            
-0003bb24  vApplicationStackOverflowHook              
-0003bb62  vApplicationTickHook                       
-0003bac6  vConfigureTimerForRunTimeStats             
-0003b6bc  vListInitialise                            
-0003bb36  vListInitialiseItem                        
-0003aef8  vListInsert                                
-00039f60  vPortCooperativeTickISR                    
-0003ab2c  vPortFree                                  
-00039f30  vPortPreemptiveTickISR                     
-0003b7dc  vPortSetupTimerInterrupt                   
-00039f8c  vPortYield                                 
-0003ba5e  vTaskInternalSetTimeOutState               
-0003bb50  vTaskMissedYield                           
-0003b522  vTaskPlaceOnEventList                      
-0003a544  vTaskPlaceOnUnorderedEventList             
-00038b50  vTaskRemoveFromUnorderedEventList          
-0003ad88  vTaskStartScheduler                        
-0003bb56  vTaskSuspendAll                            
-000388f2  vTaskSwitchContext                         
-00004176  vTickISREntry                              
-0003b78c  wcslen                                     
-00001f5c  xEventGroup                                
-0003ade6  xEventGroupClearBits                       
-0003b802  xEventGroupCreate                          
-00038d72  xEventGroupSetBits                         
-00036ee6  xEventGroupWaitBits                        
-00039fbc  xPortStartScheduler                        
-0003a9e8  xQueueGenericCreate                        
-0003932c  xQueueGenericReset                         
-00036d4e  xQueueGenericSend                          
-0003738c  xQueueReceive                              
-00001f60  xSchedulerMessages                         
-00039fd6  xTaskCheckForTimeOut                       
-0003a41e  xTaskCreate                                
-0003b9ac  xTaskGetSchedulerState                     
-0003b7b4  xTaskGetTickCount                          
-0003610e  xTaskIncrementTick                         
-00039694  xTaskPriorityDisinherit                    
-000382a4  xTaskRemoveFromEventList                   
-00037200  xTaskResumeAll                             
+00001dce  ulRunTimeCounterOverflows                  
+00001dd2  usCriticalNesting                          
+0003950a  uxListRemove                               
+000398fc  uxTaskResetEventItemValue                  
+00004422  uxTopUsedPriority                          
+0000411e  v4RunTimeStatsTimerOverflow                
+00039da2  vApplicationIdleHook                       
+00039dcc  vApplicationMallocFailedHook               
+000399c6  vApplicationSetupTimerInterrupt            
+00039dd6  vApplicationStackOverflowHook              
+00039e0e  vApplicationTickHook                       
+00039d52  vConfigureTimerForRunTimeStats             
+000398a6  vListInitialise                            
+00039de8  vListInitialiseItem                        
+00038e80  vListInsert                                
+00037ca2  vPortCooperativeTickISR                    
+00038ab8  vPortFree                                  
+00037c72  vPortPreemptiveTickISR                     
+000399c6  vPortSetupTimerInterrupt                   
+00037cce  vPortYield                                 
+00039064  vQueueWaitForMessageRestricted             
+00039c74  vTaskInternalSetTimeOutState               
+00039dfc  vTaskMissedYield                           
+000396e0  vTaskPlaceOnEventList                      
+00038978  vTaskPlaceOnEventListRestricted            
+00038286  vTaskPlaceOnUnorderedEventList             
+00036894  vTaskRemoveFromUnorderedEventList          
+0003830c  vTaskStartScheduler                        
+00039e02  vTaskSuspendAll                            
+00036762  vTaskSwitchContext                         
+00004132  vTickISREntry                              
+00039976  wcslen                                     
+00001f72  xEventGroup                                
+00038d14  xEventGroupClearBits                       
+000399ec  xEventGroupCreate                          
+00036ab6  xEventGroupSetBits                         
+00034d70  xEventGroupWaitBits                        
+00037cfe  xPortStartScheduler                        
+0003889e  xQueueGenericCreate                        
+00037070  xQueueGenericReset                         
+00034bd8  xQueueGenericSend                          
+00035216  xQueueReceive                              
+00001f76  xSchedulerMessages                         
+00037d18  xTaskCheckForTimeOut                       
+00038160  xTaskCreate                                
+00039b96  xTaskGetSchedulerState                     
+0003999e  xTaskGetTickCount                          
+00033f98  xTaskIncrementTick                         
+000373d8  xTaskPriorityDisinherit                    
+00035fe0  xTaskRemoveFromEventList                   
+0003508a  xTaskResumeAll                             
+0003914a  xTimerCreateTimerTask                      
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -4214,57 +4271,54 @@ address   name
 00001ce4  Sig_2                                      
 00001cf8  Sig_3                                      
 00001d0c  TransmitBuffer                             
-00001d58  task1Params                                
-00001d68  task2Params                                
-00001d78  UART_FG                                    
-00001d7a  FreqLevel                                  
-00001d7c  uartsetup                                  
-00001d7e  uart2setup                                 
-00001d80  SlowToggle_Period                          
-00001d82  FastToggle_Period                          
-00001d84  SE_1_1                                     
-00001d8e  SE_1_2                                     
-00001d98  SE_2_1                                     
-00001da2  SE_2_2                                     
-00001dac  SE_3_1                                     
-00001db6  SE_3_2                                     
-00001dc0  SE_1                                       
-00001dc8  SE_2                                       
-00001dd0  SE_3                                       
-00001dd8  MasterMode                                 
-00001dda  TransmitRegAddr                            
-00001ddb  RXByteCtr                                  
-00001ddc  ReceiveIndex                               
-00001ddd  TXByteCtr                                  
-00001dde  TransmitIndex                              
-00001de0  totalSum                                   
-00001de4  ulRunTimeCounterOverflows                  
-00001de8  usCriticalNesting                          
-00001dea  errno                                      
-00001f54  taskArray                                  
-00001f5c  xEventGroup                                
-00001f60  xSchedulerMessages                         
-00001f64  msp_lea_ifg                                
-00001f66  msp_lea_locked                             
+00001d64  SE_1_1                                     
+00001d6e  SE_1_2                                     
+00001d78  SE_2_1                                     
+00001d82  SE_2_2                                     
+00001d8c  SE_3_1                                     
+00001d96  SE_3_2                                     
+00001da0  UART_FG                                    
+00001da2  FreqLevel                                  
+00001da4  uartsetup                                  
+00001da6  uart2setup                                 
+00001da8  start                                      
+00001daa  SE_1                                       
+00001db2  SE_2                                       
+00001dba  SE_3                                       
+00001dc2  MasterMode                                 
+00001dc4  TransmitRegAddr                            
+00001dc5  RXByteCtr                                  
+00001dc6  ReceiveIndex                               
+00001dc7  TXByteCtr                                  
+00001dc8  TransmitIndex                              
+00001dca  totalSum                                   
+00001dce  ulRunTimeCounterOverflows                  
+00001dd2  usCriticalNesting                          
+00001dd4  errno                                      
+00001f6a  taskArray                                  
+00001f72  xEventGroup                                
+00001f76  xSchedulerMessages                         
+00001f7a  msp_lea_ifg                                
+00001f7c  msp_lea_locked                             
 00002c00  MULTIPLY_BUFFER                            
 00004000  USCI_B2_ISR                                
 00004000  fram_ipe_end                               
 00004000  fram_ipe_start                             
 00004000  fram_rw_start                              
 00004000  fram_rx_start                              
-000040e6  ADC12_ISR                                  
-0000412a  _c_int00_noargs                            
-00004146  msp_lea_isr                                
-00004162  v4RunTimeStatsTimerOverflow                
-00004176  vTickISREntry                              
-00004186  __TI_ISR_TRAP                              
-0000418e  _ctypes_                                   
-00004404  uxTopUsedPriority                          
-000044ea  __TI_Handler_Table_Base                    
-000044f6  __TI_Handler_Table_Limit                   
-00004502  __TI_CINIT_Base                            
-0000451a  __TI_CINIT_Limit                           
-0000451a  __TI_CINIT_Warm                            
+000040e6  _c_int00_noargs                            
+00004102  msp_lea_isr                                
+0000411e  v4RunTimeStatsTimerOverflow                
+00004132  vTickISREntry                              
+00004142  __TI_ISR_TRAP                              
+0000414a  _ctypes_                                   
+0000439c  INITIAL_VALUES                             
+00004422  uxTopUsedPriority                          
+000044f6  __TI_Handler_Table_Base                    
+00004502  __TI_Handler_Table_Limit                   
+0000450e  __TI_CINIT_Base                            
+00004526  __TI_CINIT_Limit                           
+00004526  __TI_CINIT_Warm                            
 0000fee0  _stack                                     
 0000ff80  __STACK_END                                
 0000ffb4  __TI_int18                                 
@@ -4306,245 +4360,269 @@ address   name
 0000fffc  __TI_int54                                 
 0000fffe  _reset_vector                              
 00010000  ucHeap                                     
-00017800  MODEL_ARRAY_TEMP                           
-0001c620  Task1_Input                                
-00021440  Task2_Input                                
-00026260  conv3_weight                               
-0002d260  conv2_weight                               
-00031460  conv1_weight                               
-00031810  MODEL_BLOCK_TEMP_1                         
-000318d8  MODEL_BLOCK_TEMP_2                         
-000319a0  conv3_bias                                 
-00031a20  conv2_bias                                 
-00031ae0  conv1_bias                                 
-00031b00  conv1Params                                
-00031b18  conv2Params                                
-00031b30  conv3Params                                
-00031b48  SE_FC_1                                    
-00031b5c  SE_FC_2                                    
-00031bcc  conv1scale                                 
-00031bd6  conv2scale                                 
-00031be0  conv3scale                                 
-00031bea  pow                                        
-00031bea  powl                                       
-00032d36  __mspabi_addd                              
-00033460  exp                                        
-00033460  expl                                       
-00033988  __TI_frcdivd                               
-00033df0  __mspabi_divull                            
-0003413e  filters_sum                                
-000346fe  sqrt                                       
-000346fe  sqrtl                                      
-000349da  __TI_printfi                               
-00034c88  Task1                                      
-00034f24  Task2                                      
-000351c0  __mspabi_mpyd                              
-000356ba  conv                                       
-00035b06  __mspabi_divd                              
-0003610e  xTaskIncrementTick                         
-000362e6  msp_matrix_mpy_q15                         
-0003667c  floor                                      
-0003667c  floorl                                     
-00036840  global_avg_pool                            
-000369f6  filter_im2col                              
-00036d4e  xQueueGenericSend                          
-00036ee6  xEventGroupWaitBits                        
-00037074  se1_fc2                                    
-00037200  xTaskResumeAll                             
-0003738c  xQueueReceive                              
-0003767e  maxpooling_with_importance                 
-000377e4  __TI_frcmpyd                               
-00037948  sigmoid                                    
-00037c0a  ldexp                                      
-00037c0a  ldexpl                                     
-00037c0a  scalbn                                     
-00037c0a  scalbnl                                    
-00037d64  dense_koo                                  
-00037ebc  conv2d                                     
-0003800a  se1_fc1                                    
-00038158  pvPortMalloc                               
-000382a4  xTaskRemoveFromEventList                   
-000383f0  _DBGUART                                   
-00038680  CS_setDCOFreq                              
-000387c0  __mspabi_subf                              
-000387c6  __mspabi_addf                              
-000388f2  vTaskSwitchContext                         
-00038a24  boardSetup                                 
-00038b50  vTaskRemoveFromUnorderedEventList          
-00038c6c  round                                      
-00038c6c  roundl                                     
-00038d72  xEventGroupSetBits                         
-0003906a  padding_same                               
-0003932c  xQueueGenericReset                         
-0003940a  max_pooling_layer                          
-000394e6  __mspabi_cmpd                              
-00039694  xTaskPriorityDisinherit                    
-00039764  SchedulerTask                              
-000398f6  matrix32_add                               
-000399ae  __mspabi_mpyf                              
-00039bce  setFrequency                               
-00039c82  __mspabi_cvtdf                             
-00039de0  maxpooling_filters                         
-00039e8a  frexp                                      
-00039e8a  frexpl                                     
-00039f30  vPortPreemptiveTickISR                     
-00039f60  vPortCooperativeTickISR                    
-00039f8c  vPortYield                                 
-00039fbc  xPortStartScheduler                        
-00039fd6  xTaskCheckForTimeOut                       
-0003a11a  __mspabi_fltlid                            
-0003a256  EUSCI_A_UART_init                          
-0003a2f0  task_start                                 
-0003a388  __TI_ltoa                                  
-0003a41e  xTaskCreate                                
-0003a544  vTaskPlaceOnUnorderedEventList             
-0003a5ca  convertFloat                               
-0003a644  __TI_auto_init_nobinit_nopinit_hold_wdt    
-0003a734  snprintf                                   
-0003a7ac  __TI_decompress_lzss                       
-0003a822  GPIO_setAsPeripheralModuleFunctionInputPin 
-0003a894  GPIO_setAsPeripheralModuleFunctionOutputPin
-0003a978  uartinit                                   
-0003a9e8  xQueueGenericCreate                        
-0003aac2  CS_initClockSignal                         
-0003ab2c  vPortFree                                  
-0003ab96  __mspabi_fixfi                             
-0003abfe  __mspabi_fixdli                            
-0003ac64  atoi                                       
-0003ad88  vTaskStartScheduler                        
-0003ade6  xEventGroupClearBits                       
-0003ae44  __mspabi_mpyll_f5hw                        
-0003aea0  __mspabi_divul                             
-0003aea0  __mspabi_remul                             
-0003aef8  vListInsert                                
-0003af4c  I2C_Master_WriteReg                        
-0003b03c  msp_lea_init                               
-0003b08a  convertl                                   
-0003b0d6  SE_Block                                   
-0003b120  AB1805_set_datetime                        
-0003b160  __mspabi_srall                             
-0003b1a0  __mspabi_divli                             
-0003b1a0  __mspabi_remli                             
-0003b1e0  __mspabi_sral_15                           
-0003b1e4  __mspabi_sral_14                           
-0003b1e8  __mspabi_sral_13                           
-0003b1ec  __mspabi_sral_12                           
-0003b1f0  __mspabi_sral_11                           
-0003b1f4  __mspabi_sral_10                           
-0003b1f8  __mspabi_sral_9                            
-0003b1fc  __mspabi_sral_8                            
-0003b200  __mspabi_sral_7                            
-0003b204  __mspabi_sral_6                            
-0003b208  __mspabi_sral_5                            
-0003b20c  __mspabi_sral_4                            
-0003b210  __mspabi_sral_3                            
-0003b214  __mspabi_sral_2                            
-0003b218  __mspabi_sral_1                            
-0003b21e  __mspabi_slll_15                           
-0003b222  __mspabi_slll_14                           
-0003b226  __mspabi_slll_13                           
-0003b22a  __mspabi_slll_12                           
-0003b22e  __mspabi_slll_11                           
-0003b232  __mspabi_slll_10                           
-0003b236  __mspabi_slll_9                            
-0003b23a  __mspabi_slll_8                            
-0003b23e  __mspabi_slll_7                            
-0003b242  __mspabi_slll_6                            
-0003b246  __mspabi_slll_5                            
-0003b24a  __mspabi_slll_4                            
-0003b24e  __mspabi_slll_3                            
-0003b252  __mspabi_slll_2                            
-0003b256  __mspabi_slll_1                            
-0003b25c  __mspabi_srll_15                           
-0003b260  __mspabi_srll_14                           
-0003b264  __mspabi_srll_13                           
-0003b268  __mspabi_srll_12                           
-0003b26c  __mspabi_srll_11                           
-0003b270  __mspabi_srll_10                           
-0003b274  __mspabi_srll_9                            
-0003b278  __mspabi_srll_8                            
-0003b27c  __mspabi_srll_7                            
-0003b280  __mspabi_srll_6                            
-0003b284  __mspabi_srll_5                            
-0003b288  __mspabi_srll_4                            
-0003b28c  __mspabi_srll_3                            
-0003b290  __mspabi_srll_2                            
-0003b294  __mspabi_srll_1                            
-0003b29a  memcpy                                     
-0003b2d6  __mspabi_sllll                             
-0003b310  __mspabi_srlll                             
-0003b34a  main                                       
-0003b384  uxListRemove                               
-0003b3be  __mspabi_fltif                             
-0003b3f4  memccpy                                    
-0003b45c  __mspabi_subd                              
-0003b48e  convert                                    
-0003b4c0  dma_load                                   
-0003b522  vTaskPlaceOnEventList                      
-0003b552  AB1805_init                                
-0003b580  __mspabi_negd                              
-0003b5dc  copysign                                   
-0003b5dc  copysignl                                  
-0003b638  __mspabi_mpyull_f5hw                       
-0003b690  __mspabi_divi                              
-0003b690  __mspabi_remi                              
-0003b6bc  vListInitialise                            
-0003b712  uxTaskResetEventItemValue                  
-0003b73c  __mspabi_fixdi                             
-0003b78c  wcslen                                     
-0003b7b4  xTaskGetTickCount                          
-0003b7dc  vApplicationSetupTimerInterrupt            
-0003b7dc  vPortSetupTimerInterrupt                   
-0003b802  xEventGroupCreate                          
-0003b828  addTaskToArray                             
-0003b84c  __TI_zero_init                             
-0003b870  pxPortInitialiseStack                      
-0003b894  __mspabi_mpyl_f5hw                         
-0003b8b8  EUSCI_A_UART_transmitData                  
-0003b8da  memset                                     
-0003b8fa  CopyArray                                  
-0003b916  strchr                                     
-0003b932  AB1805_write_rtc_register                  
-0003b94c  AB1805_set_day                             
-0003b964  AB1805_set_hour                            
-0003b97c  AB1805_set_month                           
-0003b994  __mspabi_mpyi_f5hw                         
-0003b9ac  xTaskGetSchedulerState                     
-0003b9c4  AB1805_set_date                            
-0003b9da  AB1805_set_minute                          
-0003b9f0  AB1805_set_second                          
-0003ba06  __TI_decompress_none                       
-0003ba48  __mspabi_divu                              
-0003ba48  __mspabi_remu                              
-0003ba5e  vTaskInternalSetTimeOutState               
-0003ba72  strlen                                     
-0003ba84  toupper                                    
-0003ba96  __mspabi_sral                              
-0003baa6  __mspabi_slll                              
-0003bab6  __mspabi_srll                              
-0003bac6  vConfigureTimerForRunTimeStats             
-0003bad6  AB1805_set_year                            
-0003bae2  EUSCI_A_UART_clearInterrupt                
-0003baee  __mspabi_fltid                             
-0003bafa  vApplicationIdleHook                       
-0003bb06  abs                                        
-0003bb10  __mspabi_slli                              
-0003bb1a  vApplicationMallocFailedHook               
-0003bb24  vApplicationStackOverflowHook              
-0003bb2e  fp_relu                                    
-0003bb36  vListInitialiseItem                        
-0003bb3e  EUSCI_A_UART_enable                        
-0003bb44  PMM_unlockLPM5                             
-0003bb4a  C$$EXIT                                    
-0003bb4a  abort                                      
-0003bb50  vTaskMissedYield                           
-0003bb56  vTaskSuspendAll                            
-0003bb5c  _system_pre_init                           
-0003bb60  _system_post_cinit                         
-0003bb62  vApplicationTickHook                       
+00015000  MODEL_ARRAY_TEMP                           
+00019e20  Task1_Input                                
+0001ec40  Task2_Input                                
+00023a60  conv3_weight                               
+0002aa60  conv2_weight                               
+0002ec60  conv1_weight                               
+0002f010  MODEL_BLOCK_TEMP_1                         
+0002f0d8  MODEL_BLOCK_TEMP_2                         
+0002f1a0  conv3_bias                                 
+0002f220  conv2_bias                                 
+0002f2e0  ML_num                                     
+0002f304  conv1_bias                                 
+0002f324  conv1Params                                
+0002f33c  conv2Params                                
+0002f354  conv3Params                                
+0002f36c  SE_FC_1                                    
+0002f380  SE_FC_2                                    
+0002f3d0  task1Params                                
+0002f3e2  task2Params                                
+0002f3f4  end_time                                   
+0002f424  conv1scale                                 
+0002f42e  conv2scale                                 
+0002f438  conv3scale                                 
+0002f442  fail                                       
+0002f443  check                                      
+0002f444  restore_tick                               
+0002f448  elapsed_ticks                              
+0002f44c  pow                                        
+0002f44c  powl                                       
+00030598  __mspabi_addd                              
+00030cc2  exp                                        
+00030cc2  expl                                       
+000311ea  __TI_frcdivd                               
+00031652  filters_sum                                
+00031a3e  __mspabi_divull                            
+0003206a  sqrt                                       
+0003206a  sqrtl                                      
+00032346  Task2                                      
+0003261a  Task1                                      
+000328da  __TI_printfi                               
+00032b88  SchedulerTask                              
+00032e1e  __mspabi_mpyd                              
+00033318  conv                                       
+0003377c  __mspabi_divd                              
+00033998  conv2d                                     
+00033f98  xTaskIncrementTick                         
+00034170  msp_matrix_mpy_q15                         
+00034506  floor                                      
+00034506  floorl                                     
+000346ca  global_avg_pool                            
+00034880  filter_im2col                              
+00034bd8  xQueueGenericSend                          
+00034d70  xEventGroupWaitBits                        
+00034efe  se1_fc2                                    
+0003508a  xTaskResumeAll                             
+00035216  xQueueReceive                              
+00035508  maxpooling_with_importance                 
+0003566e  __TI_frcmpyd                               
+000357d2  sigmoid                                    
+00035a94  ldexp                                      
+00035a94  ldexpl                                     
+00035a94  scalbn                                     
+00035a94  scalbnl                                    
+00035bee  dense_koo                                  
+00035d46  se1_fc1                                    
+00035e94  pvPortMalloc                               
+00035fe0  xTaskRemoveFromEventList                   
+0003612c  _DBGUART                                   
+000363bc  CS_setDCOFreq                              
+00036630  __mspabi_subf                              
+00036636  __mspabi_addf                              
+00036762  vTaskSwitchContext                         
+00036894  vTaskRemoveFromUnorderedEventList          
+000369b0  round                                      
+000369b0  roundl                                     
+00036ab6  xEventGroupSetBits                         
+00036dae  padding_same                               
+00037070  xQueueGenericReset                         
+0003714e  max_pooling_layer                          
+0003722a  __mspabi_cmpd                              
+000373d8  xTaskPriorityDisinherit                    
+000374a8  boardSetup                                 
+00037638  matrix32_add                               
+000376f0  __mspabi_mpyf                              
+00037910  setFrequency                               
+000379c4  __mspabi_cvtdf                             
+00037b22  maxpooling_filters                         
+00037bcc  frexp                                      
+00037bcc  frexpl                                     
+00037c72  vPortPreemptiveTickISR                     
+00037ca2  vPortCooperativeTickISR                    
+00037cce  vPortYield                                 
+00037cfe  xPortStartScheduler                        
+00037d18  xTaskCheckForTimeOut                       
+00037e5c  __mspabi_fltlid                            
+00037f98  EUSCI_A_UART_init                          
+00038032  task_start                                 
+000380ca  __TI_ltoa                                  
+00038160  xTaskCreate                                
+00038286  vTaskPlaceOnUnorderedEventList             
+0003830c  vTaskStartScheduler                        
+0003838e  convertFloat                               
+000384fc  __TI_auto_init_nobinit_nopinit_hold_wdt    
+000385ec  snprintf                                   
+00038664  __TI_decompress_lzss                       
+000386da  GPIO_setAsPeripheralModuleFunctionInputPin 
+0003874c  GPIO_setAsPeripheralModuleFunctionOutputPin
+00038830  main                                       
+0003889e  xQueueGenericCreate                        
+00038978  vTaskPlaceOnEventListRestricted            
+000389e4  CS_initClockSignal                         
+00038a4e  uartinit                                   
+00038ab8  vPortFree                                  
+00038b22  __mspabi_fixfi                             
+00038b8a  __mspabi_fixdli                            
+00038bf0  atoi                                       
+00038d14  xEventGroupClearBits                       
+00038d72  __mspabi_mpyll_f5hw                        
+00038e28  __mspabi_divul                             
+00038e28  __mspabi_remul                             
+00038e80  vListInsert                                
+00038ed4  I2C_Master_WriteReg                        
+00039016  msp_lea_init                               
+00039064  vQueueWaitForMessageRestricted             
+000390b2  convertl                                   
+0003914a  xTimerCreateTimerTask                      
+00039196  SE_Block                                   
+000391e0  AB1805_get_datetime                        
+00039224  EUSCI_A_UART_transmitData                  
+00039266  AB1805_set_datetime                        
+000392a6  I2C_Master_ReadReg                         
+000392e6  __mspabi_srall                             
+00039326  __mspabi_divli                             
+00039326  __mspabi_remli                             
+00039366  __mspabi_sral_15                           
+0003936a  __mspabi_sral_14                           
+0003936e  __mspabi_sral_13                           
+00039372  __mspabi_sral_12                           
+00039376  __mspabi_sral_11                           
+0003937a  __mspabi_sral_10                           
+0003937e  __mspabi_sral_9                            
+00039382  __mspabi_sral_8                            
+00039386  __mspabi_sral_7                            
+0003938a  __mspabi_sral_6                            
+0003938e  __mspabi_sral_5                            
+00039392  __mspabi_sral_4                            
+00039396  __mspabi_sral_3                            
+0003939a  __mspabi_sral_2                            
+0003939e  __mspabi_sral_1                            
+000393a4  __mspabi_slll_15                           
+000393a8  __mspabi_slll_14                           
+000393ac  __mspabi_slll_13                           
+000393b0  __mspabi_slll_12                           
+000393b4  __mspabi_slll_11                           
+000393b8  __mspabi_slll_10                           
+000393bc  __mspabi_slll_9                            
+000393c0  __mspabi_slll_8                            
+000393c4  __mspabi_slll_7                            
+000393c8  __mspabi_slll_6                            
+000393cc  __mspabi_slll_5                            
+000393d0  __mspabi_slll_4                            
+000393d4  __mspabi_slll_3                            
+000393d8  __mspabi_slll_2                            
+000393dc  __mspabi_slll_1                            
+000393e2  __mspabi_srll_15                           
+000393e6  __mspabi_srll_14                           
+000393ea  __mspabi_srll_13                           
+000393ee  __mspabi_srll_12                           
+000393f2  __mspabi_srll_11                           
+000393f6  __mspabi_srll_10                           
+000393fa  __mspabi_srll_9                            
+000393fe  __mspabi_srll_8                            
+00039402  __mspabi_srll_7                            
+00039406  __mspabi_srll_6                            
+0003940a  __mspabi_srll_5                            
+0003940e  __mspabi_srll_4                            
+00039412  __mspabi_srll_3                            
+00039416  __mspabi_srll_2                            
+0003941a  __mspabi_srll_1                            
+00039420  memcpy                                     
+0003945c  AB1805_init                                
+00039496  __mspabi_sllll                             
+000394d0  __mspabi_srlll                             
+0003950a  uxListRemove                               
+0003957c  __mspabi_fltif                             
+000395b2  memccpy                                    
+0003961a  __mspabi_subd                              
+0003964c  convert                                    
+0003967e  dma_load                                   
+000396e0  vTaskPlaceOnEventList                      
+00039710  __mspabi_negd                              
+0003976c  copysign                                   
+0003976c  copysignl                                  
+000397f6  __mspabi_mpyull_f5hw                       
+0003987a  __mspabi_divi                              
+0003987a  __mspabi_remi                              
+000398a6  vListInitialise                            
+000398fc  uxTaskResetEventItemValue                  
+00039926  __mspabi_fixdi                             
+00039976  wcslen                                     
+0003999e  xTaskGetTickCount                          
+000399c6  vApplicationSetupTimerInterrupt            
+000399c6  vPortSetupTimerInterrupt                   
+000399ec  xEventGroupCreate                          
+00039a12  addTaskToArray                             
+00039a36  __TI_zero_init                             
+00039a5a  pxPortInitialiseStack                      
+00039a7e  __mspabi_mpyl_f5hw                         
+00039aa2  resetUART                                  
+00039ac4  memset                                     
+00039ae4  CopyArray                                  
+00039b00  strchr                                     
+00039b1c  AB1805_write_rtc_register                  
+00039b36  AB1805_set_day                             
+00039b4e  AB1805_set_hour                            
+00039b66  AB1805_set_month                           
+00039b7e  __mspabi_mpyi_f5hw                         
+00039b96  xTaskGetSchedulerState                     
+00039bae  AB1805_set_date                            
+00039bc4  AB1805_set_minute                          
+00039bda  AB1805_set_second                          
+00039bf0  bcd_to_decimal                             
+00039c06  __TI_decompress_none                       
+00039c5e  __mspabi_divu                              
+00039c5e  __mspabi_remu                              
+00039c74  vTaskInternalSetTimeOutState               
+00039c88  AB1805_get_hour                            
+00039c9a  AB1805_get_month                           
+00039cac  AB1805_read_rtc_register                   
+00039cbe  strlen                                     
+00039cd0  toupper                                    
+00039ce2  AB1805_get_date                            
+00039cf2  AB1805_get_minute                          
+00039d02  AB1805_get_second                          
+00039d12  AB1805_get_year                            
+00039d22  __mspabi_sral                              
+00039d32  __mspabi_slll                              
+00039d42  __mspabi_srll                              
+00039d52  vConfigureTimerForRunTimeStats             
+00039d62  AB1805_get_day                             
+00039d70  AB1805_get_hundredth                       
+00039d7e  AB1805_set_year                            
+00039d8a  EUSCI_A_UART_clearInterrupt                
+00039d96  __mspabi_fltid                             
+00039da2  vApplicationIdleHook                       
+00039dae  AB1805_get_rtc_data                        
+00039db8  abs                                        
+00039dc2  __mspabi_slli                              
+00039dcc  vApplicationMallocFailedHook               
+00039dd6  vApplicationStackOverflowHook              
+00039de0  fp_relu                                    
+00039de8  vListInitialiseItem                        
+00039df0  EUSCI_A_UART_enable                        
+00039df6  C$$EXIT                                    
+00039df6  abort                                      
+00039dfc  vTaskMissedYield                           
+00039e02  vTaskSuspendAll                            
+00039e08  _system_pre_init                           
+00039e0c  _system_post_cinit                         
+00039e0e  vApplicationTickHook                       
 ffffffff  __TI_pprof_out_hndl                        
 ffffffff  __TI_prof_data_size                        
 ffffffff  __TI_prof_data_start                       
 ffffffff  __c_args__                                 
 
-[1882 symbols]
+[1903 symbols]

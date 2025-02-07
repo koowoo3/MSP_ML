@@ -7,12 +7,30 @@
 
 #include "layers.h"
 #include "myuart.h"
+#include "task_common.h"
 
 #pragma PERSISTENT(PADDING_BUFFER)
 static int8_t PADDING_BUFFER[PADDING_BUFFER_LENGTH] = {0};
 
 #pragma PERSISTENT(FILTER_BUFFER)
 static int16_t FILTER_BUFFER[FILTER_BUFFER_LENGTH] = {0};
+
+#pragma PERSISTENT(ML_num)
+int16_t ML_num[2][3][3]={0};  //2: layer num, 3: convolution num, 3: parameter; ex) first(numFilters,numChannels,result_length) second(..)
+
+
+//#pragma PERSISTENT(T1_conv)
+//struct convNum T1_conv = {
+//    .first = { .numFilters = 16, .numChannels = 3, .result_length = 1024 },
+//    .sec   = { .numFilters = 32, .numChannels = 16, .result_length = 256 },
+//    .third = { .numFilters = 64, .numChannels = 32, .result_length = 64 }
+//};
+//#pragma PERSISTENT(T2_conv)
+//struct convNum T2_conv = {
+//    .first = { .numFilters = 16, .numChannels = 3, .result_length = 1024 },
+//    .sec   = { .numFilters = 32, .numChannels = 16, .result_length = 256 },
+//    .third = { .numFilters = 64, .numChannels = 32, .result_length = 64 }
+//};
 
 extern int16_t MODEL_BLOCK_TEMP[100];
 
@@ -235,7 +253,7 @@ matrix *filter_simple(matrix *result, matrix *input, matrix *filter, uint16_t pr
 }
 
 
-matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numChannels, int16_t b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, uint16_t conv_numRows, uint16_t conv_numCols, Convscale convscale){
+matrix_8 *filters_sum(int8_t task_num, int8_t conv_num, matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numChannels, int16_t b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, uint16_t conv_numRows, uint16_t conv_numCols, Convscale convscale){
     int8_t *filter_head = filter->data;
     int8_t *input_head = input->data;
     uint16_t i, result_length = result->numRows * result->numCols, input_length = input->numRows * input->numCols, filter_length = filter->numRows * filter->numCols, input_numRows = input->numRows, input_numCols = input->numCols;
@@ -245,7 +263,11 @@ matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint1
     //memset(result->data, 0, result_length * sizeof(dtype));
     memset(t_result, 0, result_length * sizeof(int32_t));
 
-    for (i = numChannels; i > 0; i--){
+    int16_t (*t)[3][3] = ML_num;
+    i = t[task_num-1][conv_num-1][1];
+    /* Need to Make a checkpoint here */
+    for (i = numChannels; i > 0; i--){   //numChannels 를 fram 에 저장.
+        t[task_num-1][conv_num-1][1] = i;
         input->data = input_head + input_length * (i - 1);
         filter->data = filter_head + filter_length * (i - 1);
         if (padding == 1) {
@@ -260,11 +282,17 @@ matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint1
         matrix32_add(&temp_result, &temp_result, &temp);
         input->numRows = input_numRows;
         input->numCols = input_numCols;
-        input->data = input_head;
+        input->data = input_head;           //여기서 checkpoint.
     }
+    t[task_num-1][conv_num-1][1] = i;
+
+    /* this is for the activation?
+     * make it to int 8 */
+    //i = t[task_num-1][conv_num-1][2];
     int32_t scale = convscale.scale;//83;
     int32_t y_zero_point = convscale.y_zero_point;//-128;
-    for (i = result_length; i > 0; i --){
+    for (i = result_length; i > 0; i --){   //이것도 몇번째까지 더했는지 fram 에 저장.
+        t[task_num-1][conv_num-1][2] = i;
         temp_result.data[i - 1] = temp_result.data[i - 1] + b;
         volatile int64_t t = temp_result.data[i - 1];
         t *= scale;
@@ -274,6 +302,7 @@ matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint1
         if (t > 127) t = 127;
         result->data[i - 1] = (int8_t)t;
     }
+    t[task_num-1][conv_num-1][2] = i;
 //    for (i = result_length; i > 0; i --){
 //        result->data[i - 1] = result->data[i - 1] + b;
 //        int32_t temp = result->data[i - 1];
@@ -289,18 +318,21 @@ matrix_8 *filters_sum(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint1
     return result;
 }
 
-matrix_8 *conv2d(matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numFilters, uint16_t numChannels, int16_t *b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, Convscale convscale){
+matrix_8 *conv2d(int8_t task_num, int8_t conv_num, matrix_8 *result, matrix_8 *input, matrix_8 *filter, uint16_t numFilters, uint16_t numChannels, int16_t *b, int16_t (*activation)(int16_t, uint16_t), uint16_t precision, uint16_t stride_numRows, uint16_t stride_numCols, uint16_t padding, Convscale convscale){
     uint16_t i, result_length = result->numRows * result->numCols, filter_length = filter->numRows * filter->numCols * numChannels;
     int8_t *filter_head = filter->data, *result_head = result->data;
     uint16_t conv_numRows = (input->numRows - filter->numRows + 2 * padding) / stride_numRows + 1;  //koo: 바꾸기
     uint16_t conv_numCols = (input->numCols - filter->numCols + 2 * padding) / stride_numCols + 1;
-    for (i = numFilters; i > 0; i --){
-
+    int16_t (*t)[3][3] = ML_num;
+    i = t[task_num-1][conv_num-1][0];
+    //for (i = numFilters; i > 0; i --){
+    for (; i > 0; i --){  // numFilters 를 fram 안에 변수에 저장.
+        t[task_num-1][conv_num-1][0] = i;
         filter->data = filter_head + (i - 1) * filter_length;
         result->data = result_head + (i - 1) * result_length;
-        filters_sum(result, input, filter, numChannels, b[i - 1], activation, precision, stride_numRows, stride_numCols, padding, conv_numRows, conv_numCols, convscale);
-
+        filters_sum(task_num, conv_num, result, input, filter, numChannels, b[i - 1], activation, precision, stride_numRows, stride_numCols, padding, conv_numRows, conv_numCols, convscale); //온전히 연산을
     }
+    t[task_num-1][conv_num-1][0] = i;
     return result;
 }
 

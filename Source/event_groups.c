@@ -726,6 +726,25 @@ static BaseType_t prvTestWaitCondition( const EventBits_t uxCurrentEventBits,
     return xWaitConditionMet;
 }
 /*-----------------------------------------------------------*/
+BaseType_t xEventGroupSetBitsFromISR(EventGroupHandle_t xEventGroup,
+                                       EventBits_t uxBitsToSet,
+                                       BaseType_t *pxHigherPriorityTaskWoken)
+{
+    BaseType_t xReturn;
+    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+
+    xReturn = xEventGroupSetBits(xEventGroup, uxBitsToSet);
+
+    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+
+    if (pxHigherPriorityTaskWoken != NULL && xReturn != 0)
+    {
+        *pxHigherPriorityTaskWoken = pdTRUE;
+    }
+
+    return xReturn;
+}
+
 
 #if ( ( configUSE_TRACE_FACILITY == 1 ) && ( INCLUDE_xTimerPendFunctionCall == 1 ) && ( configUSE_TIMERS == 1 ) )
 

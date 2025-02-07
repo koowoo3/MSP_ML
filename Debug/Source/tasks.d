@@ -32,6 +32,7 @@ Source/tasks.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/t
 Source/tasks.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h
 Source/tasks.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h
 Source/tasks.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/stack_macros.h
+Source/tasks.obj: C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h
 Source/tasks.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 Source/tasks.obj: C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
 
@@ -98,6 +99,8 @@ C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/list.h:
 C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/timers.h:
 
 C:/Users/kooo/Documents/Koo_Intermittent/int8/Source/include/stack_macros.h:
+
+C:/Users/kooo/Documents/Koo_Intermittent/int8/uart_for_msp/myuart.h:
 
 C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
 

@@ -126,6 +126,9 @@ void AB1805_init() {
     P7SEL0 |= BIT0 | BIT1;
     P7SEL1 &= ~(BIT0 | BIT1);
 
+    P7REN |= BIT0 | BIT1;  // Pull-up/pull-down 활성화
+    P7OUT |= BIT0 | BIT1;  // Pull-up 저항 설정 (HIGH 유지)
+
     UCB2CTLW0 = UCSWRST;                           // Enable SW reset
     UCB2CTLW0 |= UCMODE_3 | UCMST | UCSSEL__SMCLK; // I2C master mode, SMCLK
     UCB2BRW = 10;                                  // fSCL = SMCLK/160 = ~100kHz

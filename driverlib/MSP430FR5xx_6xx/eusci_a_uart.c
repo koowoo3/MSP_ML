@@ -77,14 +77,32 @@ bool EUSCI_A_UART_init(uint16_t baseAddress, EUSCI_A_UART_initParam *param)
     return (retVal);
 }
 
+void resetUART(uint16_t baseAddress) {
+    HWREG16(baseAddress + OFS_UCAxCTLW0) |= UCSWRST;
+
+    HWREG16(baseAddress + OFS_UCAxIFG) &= ~UCTXIFG;
+    HWREG16(baseAddress + OFS_UCAxIFG) &= ~UCRXIFG;
+    HWREG16(baseAddress + OFS_UCAxCTLW0) &= ~UCSWRST;
+}
+
 void EUSCI_A_UART_transmitData ( uint16_t baseAddress,
     uint8_t transmitData
     )
 {
     //If interrupts are not used, poll for flags
-    if (!(HWREG16(baseAddress + OFS_UCAxIE) & UCTXIE)){
-        //Poll for transmit interrupt flag
-        while (!(HWREG16(baseAddress + OFS_UCAxIFG) & UCTXIFG));
+//    if (!(HWREG16(baseAddress + OFS_UCAxIE) & UCTXIE)){
+//        //Poll for transmit interrupt flag
+//        while (!(HWREG16(baseAddress + OFS_UCAxIFG) & UCTXIFG));
+//    }
+    if (!(HWREG16(baseAddress + OFS_UCAxIE) & UCTXIE)) {
+        int retry = 0;
+        while (!(HWREG16(baseAddress + OFS_UCAxIFG) & UCTXIFG)) {
+            retry++;
+            if (retry > 100000) {
+                resetUART(baseAddress);
+                return;
+            }
+        }
     }
 
     HWREG16(baseAddress + OFS_UCAxTXBUF) = transmitData;

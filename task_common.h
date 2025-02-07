@@ -37,21 +37,38 @@ struct TaskParameters {
     TickType_t deadline;
     int currentJob;
     int totalJobs;
+    uint8_t state;   // 1 : idle , 2: running
     TaskHandle_t handle;
 };
+
+//struct convNum {  //convolution layer 마다 따로 저장해야함.
+//    struct TaskLayerNum first;
+//    struct TaskLayerNum sec;
+//    struct TaskLayerNum third;
+//};
+
+//struct TaskLayerNum {  //convolution layer 마다 따로 저장해야함.
+//    int8_t numFilters;
+//    int8_t numChannels;
+//    int16_t result_length;
+//};
+
+
 
 #define mainSCHEDULER_PRIORITY 2
 #define mainNEW_TASK_PRIORITY 3
 
 #define TASK1_BIT (1 << 0) // Task1 실행 비트
 #define TASK2_BIT (1 << 1) // Task2 실행 비트
+#define SAVE      (1 << 2) // Task2 실행 비트
+#define RESTORE   (1 << 3) // Task2 실행 비트
 
 /* Task 1 and Task 2 Definitions */
-#define TASK1_PERIOD 20000  // ( T = D)
-#define TASK1_DEADLINE 20000
+#define TASK1_PERIOD 2000  // ( T = D)
+#define TASK1_DEADLINE 2000
 
-#define TASK2_PERIOD 30000  // ( T = D)
-#define TASK2_DEADLINE 30000
+#define TASK2_PERIOD 3000  // ( T = D)
+#define TASK2_DEADLINE 3000
 
 #define DATA_SIZE 32*32*3
 

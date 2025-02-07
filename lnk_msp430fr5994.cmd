@@ -210,7 +210,6 @@ SECTIONS
     .data       : {} > RAM | FRAM                 /* Global & static vars              */
     .TI.noinit  : {} > RAM                  /* For #pragma noinit                */
     .stack      : {} > FRAM (HIGH) //RAM (HIGH)           /* Software system stack             */
-
     .tinyram    : {} > TINYRAM              /* Tiny RAM                          */
 
     /* MSP430 INFO memory segments */

@@ -105,17 +105,25 @@ void Task1(void *pvParameters){
 
     msg.params = params;
     msg.status = statusCREATED;
-    params->releaseTime = xTaskGetTickCount();
-    params->deadline = params->releaseTime + TASK1_DEADLINE;
+
+    if(params->state == 0){  // task is uninitilized.
+        //params->state = 1; //task is now idle.
+        params->releaseTime = xTaskGetTickCount();
+        params->deadline = params->releaseTime + TASK1_DEADLINE;
+    }
+//    _DBGUART("Task1 re: %d\r\n", params->releaseTime);
+//    _DBGUART("Task1 dea: %d\r\n", params->deadline);
     xQueueSend(xSchedulerMessages, &msg, 0);
 
     while(1){
 
         xEventGroupWaitBits(xEventGroup, TASK1_BIT, pdTRUE, pdFALSE, portMAX_DELAY);
+        params->state = 2; // now task is running
         int8_t * data = Task1_Input;
 
+        _DBGUART("Task1 Start\r\n");
         if(params->currentJob == 0){
-            params->releaseTime = xTaskGetTickCount();
+            //params->releaseTime = xTaskGetTickCount();
 
             int receivedCount = 0;
 //            while (receivedCount < DATA_SIZE) {
@@ -135,12 +143,14 @@ void Task1(void *pvParameters){
             outputLabels.numCols = LEA_RESERVED;   // one more column is reserved for LEA
             outputLabels.data = output_buffer;
 
-            params->deadline = params->releaseTime + TASK1_DEADLINE;
+            //params->deadline = params->releaseTime + TASK1_DEADLINE;
         }
 
+
         else if(params->currentJob == 1){
+            _DBGUART("J1\r\n");
         //uart 작업 추가하기.
-        conv(&outputLabels, &inputFeatures, conv1Params, conv1scale, 1); // matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale, task num
+        conv(&outputLabels, &inputFeatures, conv1Params, conv1scale, 1, 1); // matrix *output, matrix *input, ConvLayerParams convparams, Convscale convscale, task num
 
         SE_Block(32, 32, 0, 16, fc, block, 16, 1, 1); //row, col, block_number, channel, *fc, *block, fc_num, se_idx
 
@@ -148,8 +158,8 @@ void Task1(void *pvParameters){
         }
 
         else if(params->currentJob == 2){
-
-        conv(&outputLabels, &inputFeatures, conv2Params, conv2scale, 1);
+            _DBGUART("J2\r\n");
+        conv(&outputLabels, &inputFeatures, conv2Params, conv2scale, 1, 2);
 
         SE_Block(16, 16, 0, 32, fc, block, 32, 2, 1);
 
@@ -157,7 +167,8 @@ void Task1(void *pvParameters){
         }
 
         else if(params->currentJob == 3){
-        conv(&outputLabels, &inputFeatures, conv3Params, conv3scale, 1);
+            _DBGUART("J3\r\n");
+        conv(&outputLabels, &inputFeatures, conv3Params, conv3scale, 1, 3);
 
         SE_Block(8, 8, 0, 64, fc, block, 64, 3, 1);
 
@@ -165,20 +176,21 @@ void Task1(void *pvParameters){
         }
 
         else if(params->currentJob == 4){
-
+            _DBGUART("J4\r\n");
         ans = dense_koo(Task1_Input,MODEL_ARRAY_TEMP);
-        _DBGUART("class is the %d\r\n", ans);
+        _DBGUART("class: %d\r\n", ans);
 
+        }
+
+        TickType_t Time = xTaskGetTickCount();
+        if(params->deadline < Time){
+            _DBGUART("T1 D_miss\r\n");
+            params->state = 1; // if deadline is missed start again the task.
         }
 
         params->currentJob++;
         if(params->currentJob >=5){
-            params->currentJob = 0;
-            TickType_t endTime = xTaskGetTickCount();
-
-            if (endTime > params->deadline) {
-                _DBGUART("Task1: DEADLINE MISS at %l (Deadline was %l)\r\n", endTime, params->deadline);
-            }
+            params->state = 1;
         }
 
         msg.status = statusCOMPLETED;

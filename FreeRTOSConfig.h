@@ -44,8 +44,8 @@ __persistent keyword to be used.  See http://www.freertos.org/a00111.html#heap_4
 #define configUSE_PREEMPTION					1
 #define configMAX_PRIORITIES					( 5 )
 #define configCPU_CLOCK_HZ						( ( unsigned long ) 16000000 )//( 8000000 )
-#define configTICK_RATE_HZ						( 1000 ) /* In this non-real time simulated environment the tick frequency has to be at least a multiple of the Win32 tick frequency, and therefore very slow. */
-#define configTOTAL_HEAP_SIZE					( 30 * 1024 )
+#define configTICK_RATE_HZ						( 100 ) /* In this non-real time simulated environment the tick frequency has to be at least a multiple of the Win32 tick frequency, and therefore very slow. */
+#define configTOTAL_HEAP_SIZE					( 20 * 1024 )
 #define configMAX_TASK_NAME_LEN					( 15 )
 #define configUSE_TRACE_FACILITY				1
 #define configUSE_16_BIT_TICKS					0
@@ -66,7 +66,7 @@ __persistent keyword to be used.  See http://www.freertos.org/a00111.html#heap_4
 #define configCHECK_FOR_STACK_OVERFLOW	2
 
 /* Software timer related definitions. */
-#define configUSE_TIMERS				0
+#define configUSE_TIMERS				1
 #define configTIMER_TASK_PRIORITY		( configMAX_PRIORITIES - 1 )
 #define configTIMER_QUEUE_LENGTH		5
 #define configTIMER_TASK_STACK_DEPTH	( configMINIMAL_STACK_SIZE )
